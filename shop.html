@@ -29,18 +29,8 @@
                     <li class="nav-item">
                         <a class="nav-link" href="about.html">About Us</a>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Shop
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="shop.html?category=men">Men's Collection</a></li>
-                            <li><a class="dropdown-item" href="shop.html?category=women">Women's Collection</a></li>
-                            <li><a class="dropdown-item" href="shop.html?category=kids">Kids Collection</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="shop.html?category=new">New Arrivals</a></li>
-                            <li><a class="dropdown-item" href="shop.html?category=sale">Sale Items</a></li>
-                        </ul>
+                    <li class="nav-item">
+                        <a class="nav-link" href="shop.html">Shop</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -189,7 +179,6 @@
 
                     <!-- Product Grid -->
                     <div class="row g-4" id="productGrid">
-                        <!-- Men's Collection -->
                         <div class="col-md-6 col-lg-4" data-category="men" data-brand="nike" data-color="black" data-price="29999" data-date="20240101" data-reviews="45">
                             <div class="product-card" data-product-id="m1">
                                 <div class="product-image">
@@ -197,6 +186,10 @@
                                     <div class="product-actions">
                                         <button class="btn wishlist-btn">
                                             <i class="far fa-heart"></i>
+                                        </button>
+                                        <button class="btn quick-view-btn" data-bs-toggle="modal" 
+                                            data-bs-target="#quickViewModal">
+                                            <i class="far fa-eye"></i>
                                         </button>
                                         <button class="btn add-to-cart-btn">
                                             <i class="fas fa-shopping-cart"></i>
@@ -222,9 +215,9 @@
                                 <div class="product-image">
                                     <img src="assets/images/products/women-1.jpg" alt="Nike Free Run" class="img-fluid">
                                     <div class="product-actions">
-                                        <button class="btn wishlist-btn">
+                                        <!-- <button class="btn wishlist-btn">
                                             <i class="far fa-heart"></i>
-                                        </button>
+                                        </button> -->
                                         <button class="btn add-to-cart-btn">
                                             <i class="fas fa-shopping-cart"></i>
                                         </button>
@@ -249,9 +242,9 @@
                                 <div class="product-image">
                                     <img src="assets/images/products/kids-1.jpg" alt="Adidas Kids Runner" class="img-fluid">
                                     <div class="product-actions">
-                                        <button class="btn wishlist-btn">
+                                        <!-- <button class="btn wishlist-btn">
                                             <i class="far fa-heart"></i>
-                                        </button>
+                                        </button> -->
                                         <button class="btn add-to-cart-btn">
                                             <i class="fas fa-shopping-cart"></i>
                                         </button>
@@ -488,6 +481,45 @@
         </div>
     </div>
     <div class="cart-overlay"></div>
+
+    <!-- Quick View Modal -->
+    <div class="modal fade" id="quickViewModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Quick View</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <img src="" alt="" class="img-fluid product-image">
+                        </div>
+                        <div class="col-md-6">
+                            <h3 class="product-title"></h3>
+                            <div class="product-price"></div>
+                            <div class="product-description mb-3">
+                                Experience ultimate comfort and style with these premium shoes.
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Color:</label>
+                                <div class="color-options">
+                                    <button class="color-btn active" style="background-color: #000"></button>
+                                    <button class="color-btn" style="background-color: #fff"></button>
+                                    <button class="color-btn" style="background-color: #ff0000"></button>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Quantity:</label>
+                                <input type="number" class="form-control quantity-input" value="1" min="1">
+                            </div>
+                            <button class="btn btn-primary add-to-cart-btn">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>

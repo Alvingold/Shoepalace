@@ -1137,11 +1137,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     
                     // Update review step
                     const shippingInfo = JSON.parse(localStorage.getItem('shippingInfo'));
-                    document.querySelector('.shipping-address').textContent = `
-                        ${shippingInfo.firstName} ${shippingInfo.lastName}
-                        ${shippingInfo.streetAddress}
-                        ${shippingInfo.city}, ${shippingInfo.state}
-                    `;
+                    document.querySelector('.shipping-address').textContent = `${shippingInfo.firstName} ${shippingInfo.lastName}, ${shippingInfo.streetAddress}, ${shippingInfo.city}, ${shippingInfo.state}`;
                     document.querySelector('.payment-method').textContent = 
                         paymentMethod === 'card' ? 'Credit/Debit Card' : 'PayPal';
                 }

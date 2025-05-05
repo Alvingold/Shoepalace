@@ -20,10 +20,21 @@ const shop = {
     setupEventListeners() {
         // Category buttons
         document.querySelectorAll('[data-category]').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const category = btn.dataset.category;
-                this.filterByCategory(category);
-                this.updateUrl('category', category);
+            btn.addEventListener('click', (e) => {
+                // Only handle clicks on category buttons, not product cards
+                if (!e.target.closest('.product-card')) {
+                    const category = btn.dataset.category;
+                    this.filterByCategory(category);
+                    this.updateUrl('category', category);
+                }
+            });
+        });
+
+        // Product click handling
+        document.querySelectorAll('.product-card').forEach(card => {
+            card.addEventListener('click', (e) => {
+                // Stop event from bubbling up to category handlers
+                e.stopPropagation();
             });
         });
 
@@ -44,6 +55,67 @@ const shop = {
                 this.sortProducts(e.target.value);
             });
         }
+
+        // Quick View Functionality
+        document.querySelectorAll('.quick-view-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                const productCard = btn.closest('.product-card');
+                if (!productCard) return;
+
+                const modal = document.getElementById('quickViewModal');
+                if (!modal) return;
+
+                const product = {
+                    id: productCard.dataset.productId,
+                    title: productCard.querySelector('.product-title').textContent,
+                    price: productCard.querySelector('.product-price').textContent,
+                    image: productCard.querySelector('.product-image img').src
+                };
+
+                // Update modal content
+                modal.querySelector('.product-title').textContent = product.title;
+                modal.querySelector('.product-price').textContent = product.price;
+                modal.querySelector('.product-image').src = product.image;
+
+                // Setup quantity input
+                const quantityInput = modal.querySelector('.quantity-input');
+                if (quantityInput) {
+                    quantityInput.value = 1;
+                }
+
+                // Setup add to cart button
+                const addToCartBtn = modal.querySelector('.add-to-cart-btn');
+                if (addToCartBtn) {
+                    addToCartBtn.onclick = function() {
+                        const quantity = parseInt(quantityInput.value) || 1;
+                        const selectedColor = modal.querySelector('.color-btn.active')?.style.backgroundColor;
+                        
+                        const productToAdd = {
+                            ...product,
+                            quantity: quantity,
+                            color: selectedColor
+                        };
+                        
+                        if (typeof cart !== 'undefined') {
+                            cart.addItem(productToAdd);
+                        }
+                        bootstrap.Modal.getInstance(modal).hide();
+                    };
+                }
+            });
+        });
+
+        // Color selection in modal
+        const colorBtns = document.querySelectorAll('.color-btn');
+        colorBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                colorBtns.forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
     },
 
     filterByCategory(category) {
@@ -64,6 +136,31 @@ const shop = {
         });
 
         this.updateProductCount(visibleCount);
+        this.updateShopTitle(category);
+    },
+
+    updateShopTitle(category) {
+        const shopTitle = document.querySelector('.shop-title');
+        if (!shopTitle) return;
+
+        if (!category || category === 'all') {
+            shopTitle.textContent = 'Our Collection';
+        } else {
+            const titles = {
+                'men': "Men's Collection",
+                'women': "Women's Collection",
+                'kids': "Kids Collection",
+                'new': 'New Arrivals',
+                'sale': 'Sale Items'
+            };
+            shopTitle.textContent = titles[category] || 'Our Collection';
+        }
+
+        // Also update breadcrumb
+        const breadcrumbActive = document.querySelector('.breadcrumb-item.active');
+        if (breadcrumbActive) {
+            breadcrumbActive.textContent = category === 'all' ? 'Shop' : (titles[category] || 'Shop');
+        }
     },
 
     applyFilters() {
