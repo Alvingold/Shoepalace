@@ -1,0 +1,131 @@
+.preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    background: linear-gradient(135deg, var(--primary-color) 0%, #1a252f 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.preloader.fade-out {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.loader-text {
+    perspective: 1000px;
+    transform-style: preserve-3d;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.loader-text span {
+    display: inline-block;
+    font-size: 4rem;
+    font-weight: 800;
+    color: var(--white);
+    text-transform: uppercase;
+    animation: flipIn 2s ease infinite;
+    transform-origin: bottom;
+    opacity: 0;
+    text-shadow: 0 0 10px rgba(255,255,255,0.3), 0 15px 5px rgba(0,0,0,0.4);
+    transform-style: preserve-3d;
+    position: relative;
+}
+
+.loader-text span::before {
+    content: attr(data-text);
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    transform: rotateX(180deg);
+    transform-origin: top;
+    opacity: 0.1;
+    filter: blur(2px);
+}
+
+.desktop-preloader {
+    display: block;
+}
+
+.mobile-preloader {
+    display: none;
+}
+
+.spinner {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.dot1, .dot2, .dot3 {
+    width: 15px;
+    height: 15px;
+    background: var(--primary-color);
+    border-radius: 50%;
+    animation: bounce 0.5s ease-in-out infinite;
+}
+
+.dot2 { animation-delay: 0.1s; }
+.dot3 { animation-delay: 0.2s; }
+
+@keyframes flipIn {
+    0% {
+        transform: rotateX(-90deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0;
+    }
+    20% {
+        transform: rotateX(0deg);
+        opacity: 1;
+    }
+    80% {
+        transform: rotateX(0deg);
+        opacity: 1;
+    }
+    90% {
+        opacity: 0;
+    }
+    100% {
+        transform: rotateX(90deg);
+        opacity: 0;
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+@media (max-width: 768px) {
+    .desktop-preloader {
+        display: none;
+    }
+    
+    .mobile-preloader {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+    }
+    h2 {
+        color: white;
+    }
+}

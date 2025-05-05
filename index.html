@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="assets/images/icon.png" type="image/x-icon">
+    <title>ShoePalace - Premium Footwear</title>
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Montserrat:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- AOS Animation Library -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+    <link rel="stylesheet" href="assets/css/animations.css">
+    <link rel="stylesheet" href="assets/css/preloader.css">
+</head>
+
+<body>
+    <!-- Preloader -->
+    <div class="preloader">
+        <!-- Desktop preloader -->
+        <div class="desktop-preloader">
+            <div class="loader-text">
+                <span style="animation-delay: 0.1s" data-text="S">S</span>
+                <span style="animation-delay: 0.2s" data-text="h">h</span>
+                <span style="animation-delay: 0.3s" data-text="o">o</span>
+                <span style="animation-delay: 0.4s" data-text="e">e</span>
+                <span style="animation-delay: 0.5s" data-text="P">P</span>
+                <span style="animation-delay: 0.6s" data-text="a">a</span>
+                <span style="animation-delay: 0.7s" data-text="l">l</span>
+                <span style="animation-delay: 0.8s" data-text="a">a</span>
+                <span style="animation-delay: 0.9s" data-text="c">c</span>
+                <span style="animation-delay: 1.0s" data-text="e">e</span>
+            </div>
+        </div>
+        
+        <!-- Mobile preloader -->
+        <div class="mobile-preloader">
+            <div class="spinner">
+                <div class="dot1"></div>
+                <div class="dot2"></div>
+                <div class="dot3"></div>
+            </div>
+            <h2>Loading...</h2>
+        </div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="nav-container container">
+            <a class="navbar-brand logo" href="#">ShoePalace</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About Us</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Shop
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="shop.html?category=men">Men's Collection</a></li>
+                            <li><a class="dropdown-item" href="shop.html?category=women">Women's Collection</a></li>
+                            <li><a class="dropdown-item" href="shop.html?category=kids">Kids Collection</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="shop.html?category=new">New Arrivals</a></li>
+                            <li><a class="dropdown-item" href="shop.html?category=sale">Sale Items</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            My Account
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="account.html">Login / Register</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="account.html#profile">Profile</a></li>
+                            <li><a class="dropdown-item" href="account.html#orders">Orders</a></li>
+                            <li><a class="dropdown-item" href="account.html#wishlist">Wishlist</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="account.html#settings">Settings</a></li>
+                            <li><a class="dropdown-item" href="#" id="logoutBtn">Logout</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                </ul>
+                <div class="search-container ms-auto me-3">
+                    <div class="search-box">
+                        <input type="text" class="search-input" placeholder="Search products...">
+                        <button class="search-btn">
+                            <i class="fa-solid fa-search" style="color: #e74c3c;"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="nav-icons">
+                    <button class="btn wishlist-nav-btn" aria-label="View wishlist">
+                        <i class="fa-solid fa-heart" style="color: #e74c3c;"></i>
+                    </button>
+                    <button class="btn cart-btn position-relative" aria-label="View shopping cart">
+                        <span class="cart-count">0</span>
+                        <i class="fa-solid fa-cart-shopping" style="color: #e74c3c;"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero container-fluid">
+        <div class="row min-vh-100 align-items-center">
+            <div class="col-lg-6 hero-content">
+                <h1>Step into Greatness</h1>
+                <p>Discover our collection of premium footwear</p>
+                <a href="shop.html" class="btn btn-primary cta-button">Shop Now</a>
+            </div>
+            <div class="col-lg-6 hero-image">
+                <img src="assets/images/hero-shoe.png" alt="Featured Shoe" class="img-fluid float-image" loading="lazy">
+            </div>
+        </div>
+    </section>
+
+    <!-- About Us Section -->
+    <section class="about-us">
+        <div class="container">
+            <!-- Section Header -->
+            <div class="section-header text-center mb-5">
+                <h2 class="section-title">ABOUT US</h2>
+                <p class="section-subtitle">Learn more about our mission and values</p>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-6 mb-4">
+                    <div class="about-icon">
+                        <i class="fa-solid fa-bullseye"></i>
+                    </div>
+                    <h3>Our Mission</h3>
+                    <p>At ShoePalace, we strive to provide the best footwear for every occasion. Our mission is to
+                        combine style, comfort, and quality to ensure that every step you take is a step in the right
+                        direction.</p>
+                </div>
+                <div class="col-lg-6 mb-4">
+                    <div class="about-icon">
+                        <i class="fa-solid fa-handshake"></i>
+                    </div>
+                    <h3>Our Values</h3>
+                    <p>We believe in sustainability, quality craftsmanship, and customer satisfaction. Our commitment to
+                        these values drives us to source the finest materials and work with skilled artisans to create
+                        footwear that lasts.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section class="why-choose-us">
+     <div class="container">
+        <!-- Section Header -->
+        <div class="section-header text-center mb-5">
+            <h2 class="section-title">WHY CHOOSE US</h2>
+            <p class="section-subtitle">Discover the reasons why we stand out</p>
+        </div>
+        
+        <div class="row">
+            <div class="col-lg-4 mb-4">
+                <div class="choose-icon">
+                    <i class="fas fa-shoe-prints"></i>
+                </div>
+                <h3>Quality Footwear</h3>
+                <p>We offer a wide range of high-quality footwear that combines style, comfort, and durability.</p>
+            </div>
+            <div class="col-lg-4 mb-4">
+                <div class="choose-icon">
+                    <i class="fas fa-leaf"></i>
+                </div>
+                <h3>Sustainable Materials</h3>
+                <p>Our products are made from sustainable materials, ensuring a minimal environmental impact.</p>
+            </div>
+            <div class="col-lg-4 mb-4">
+                <div class="choose-icon">
+                    <i class="fas fa-thumbs-up"></i>
+                </div>
+                <h3>Customer Satisfaction</h3>
+                    <p>We prioritize customer satisfaction by providing excellent service and a hassle-free shopping
+                        experience.</p>
+            </div>
+        </div>
+
+        <div class="choose-feature grid-2">
+            <div class="choose-box ope-1">
+                <div class="choose-icon">
+                    <i class="fa-solid fa-sack-dollar"></i>
+                </div>
+                <div class="choose-desc">
+                    <h5 class="mb-0">Return Policy</h5>
+                </div>
+            </div>
+            <div class="choose-box">
+                <div class="choose-icon">
+                    <i class="fas fa-lock"></i>
+                </div>
+                <div class="choose-desc">
+                    <h5 class="mb-0">Secured Payment</h5>
+                </div>
+            </div>
+            <div class="choose-box">
+                <div class="choose-icon">
+                    <i class="fas fa-truck"></i>
+                </div>
+                <div class="choose-desc">
+                    <h5 class="mb-0">On Time Delivery</h5>
+                </div>
+            </div>
+            <div class="choose-box ope-1">
+                <div class="choose-icon">
+                    <i class="fas fa-headset"></i>
+                </div>
+                <div class="choose-desc">
+                    <h5 class="mb-0">Support 24/7</h5>
+                </div>
+            </div>
+        </div>
+     </div>
+    </section>
+    
+    <!-- Categories Section -->
+<section class="categories py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="section-title">SHOP BY CATEGORY</h2>
+            <p class="section-subtitle">Find the perfect shoes for everyone</p>
+        </div>
+
+        <div class="row g-4">
+            <!-- Men's Category -->
+            <div class="col-lg-4 col-md-6">
+                <div class="card category-card h-100">
+                    <div id="menCarousel" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                    <img src="assets/images/category-section/men/men-1.jpg" class="card-img"
+                                        alt="Men's Shoes" loading="lazy">
+                            </div>
+                            <div class="carousel-item">
+                                    <img src="assets/images/category-section/men/2.JPG" class="card-img"
+                                        alt="Men's Shoes" loading="lazy">
+                            </div>
+                        </div>
+                    </div>
+                        <div
+                            class="card-img-overlay d-flex flex-column justify-content-center align-items-center text-center">
+                        <i class="fas fa-male fa-3x mb-3 text-white"></i>
+                        <h3 class="card-title text-white mb-2">Men</h3>
+                        <p class="card-text text-white mb-3">Discover Men's Collection</p>
+                        <a href="shop.html?category=men" class="btn btn-light">Shop Now</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Women's Category -->
+            <div class="col-lg-4 col-md-6">
+                <div class="card category-card h-100">
+                    <div id="womenCarousel" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                    <img src="assets/images/category-section/women/women-1.jpg" class="card-img"
+                                        alt="Women's Shoes" loading="lazy">
+                            </div>
+                            <div class="carousel-item">
+                                    <img src="assets/images/category-section/women/women-2.jpg" class="card-img"
+                                        alt="Women's Shoes" loading="lazy">
+                            </div>
+                        </div>
+                    </div>
+                        <div
+                            class="card-img-overlay d-flex flex-column justify-content-center align-items-center text-center">
+                        <i class="fas fa-female fa-3x mb-3 text-white"></i>
+                        <h3 class="card-title text-white mb-2">Women</h3>
+                        <p class="card-text text-white mb-3">Explore Women's Collection</p>
+                        <a href="shop.html?category=women" class="btn btn-light">Shop Now</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kids' Category -->
+            <div class="col-lg-4 col-md-6">
+                <div class="card category-card h-100">
+                    <div id="kidsCarousel" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                    <img src="assets/images/category-section/kids/kids-1.jpg" class="card-img"
+                                        alt="Kids' Shoes" loading="lazy">
+                            </div>
+                            <div class="carousel-item">
+                                    <img src="assets/images/category-section/kids/kids-2.jpg" class="card-img"
+                                        alt="Kids' Shoes" loading="lazy">
+                            </div>
+                        </div>
+                    </div>
+                        <div
+                            class="card-img-overlay d-flex flex-column justify-content-center align-items-center text-center">
+                        <i class="fas fa-child fa-3x mb-3 text-white"></i>
+                        <h3 class="card-title text-white mb-2">Kids</h3>
+                        <p class="card-text text-white mb-3">Browse Kids Collection</p>
+                        <a href="shop.html?category=kids" class="btn btn-light">Shop Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Product Showcase Section -->
+<section class="product-showcase py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="section-title">Product Showcase</h2>
+            <p class="section-subtitle">Discover our curated collection</p>
+        </div>
+        
+        <!-- Product Categories Tabs -->
+        <ul class="nav nav-tabs product-tabs justify-content-center mb-5" id="productTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                    <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#boots"
+                        type="button">Boots</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                    <button class="nav-link" data-bs-toggle="tab" data-bs-target="#sneakers" type="button">Sneakers &
+                        Athletics</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                    <button class="nav-link" data-bs-toggle="tab" data-bs-target="#work" type="button">Work &
+                        Safety</button>
+            </li>
+        </ul>
+
+        <!-- Add navigation controls -->
+        <div class="product-nav d-md-none">
+            <button class="nav-btn prev-btn" aria-label="Previous">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="nav-btn next-btn" aria-label="Next">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+
+        <!-- Product grid container -->
+        <div class="tab-content" id="productTabContent">
+            <!-- Boots tab -->
+            <div class="tab-pane fade show active" id="boots">
+                <div class="products-slider">
+                    <div class="row g-4 slider-content">
+                        <!-- Product Card (repeat 4 times) -->
+                        <div class="col-lg-3 col-md-6">
+                            <div class="product-card" data-product-id="boots-001">
+                                <div class="product-image">
+                                        <img src="assets/images/products/boots-1.jpg" alt="Boot Product" loading="lazy">
+                                    <div class="product-overlay">
+                                            <button class="overlay-btn wishlist-btn" aria-label="Add to wishlist"><i
+                                                    class="far fa-heart"></i></button>
+                                            <button class="overlay-btn quick-view-btn" data-bs-toggle="modal"
+                                                data-bs-target="#quickViewModal" aria-label="Quick view"><i
+                                                    class="far fa-eye"></i></button>
+                                            <button class="overlay-btn add-to-cart-btn" aria-label="Add to cart"><i
+                                                    class="fas fa-shopping-cart"></i></button>
+                                    </div>
+                                </div>
+                                <div class="product-details">
+                                    <h5 class="product-title">Classic Leather Boot</h5>
+                                    <div class="product-rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star-half-alt"></i>
+                                    </div>
+                                    <p class="current-price">₦ 149.99</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                            <div class="product-card" data-product-id="boots-002">
+                                <div class="product-image">
+                                        <img src="assets/images/products/boots-1.jpg" alt="Bot Product" loading="lazy">
+                                    <div class="product-overlay">
+                                            <button class="overlay-btn wishlist-btn" aria-label="Add to wishlist"><i
+                                                    class="far fa-heart"></i></button>
+                                            <button class="overlay-btn quick-view-btn" data-bs-toggle="modal"
+                                                data-bs-target="#quickViewModal" aria-label="Quick view"><i
+                                                    class="far fa-eye"></i></button>
+                                            <button class="overlay-btn add-to-cart-btn" aria-label="Add to cart"><i
+                                                    class="fas fa-shopping-cart"></i></button>
+                                    </div>
+                                </div>
+                                <div class="product-details">
+                                    <h5 class="product-title">Classic Leather Boot</h5>
+                                    <div class="product-rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star-half-alt"></i>
+                                    </div>
+                                    <p class="current-price">₦ 149.99</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                            <div class="product-card" data-product-id="boots-003">
+                                <div class="product-image">
+                                        <img src="assets/images/products/boots-1.jpg" alt="Boo Product" loading="lazy">
+                                    <div class="product-overlay">
+                                            <button class="overlay-btn wishlist-btn" aria-label="Add to wishlist"><i
+                                                    class="far fa-heart"></i></button>
+                                            <button class="overlay-btn quick-view-btn" data-bs-toggle="modal"
+                                                data-bs-target="#quickViewModal" aria-label="Quick view"><i
+                                                    class="far fa-eye"></i></button>
+                                            <button class="overlay-btn add-to-cart-btn" aria-label="Add to cart"><i
+                                                    class="fas fa-shopping-cart"></i></button>
+                                    </div>
+                                </div>
+                                <div class="product-details">
+                                    <h5 class="product-title">Classic Leather Boot</h5>
+                                    <div class="product-rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star-half-alt"></i>
+                                    </div>
+                                    <p class="current-price">₦ 149.99</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Repeat for other products -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sneakers tab -->
+            <div class="tab-pane fade" id="sneakers">
+                <div class="products-slider">
+                    <div class="row g-4 slider-content">
+                        <!-- Product Card (repeat 4 times) -->
+                        <div class="col-lg-3 col-md-6">
+                            <div class="product-card" data-product-id="sneakers-001">
+                                <div class="product-image">
+                                        <img src="assets/images/products/sneakers-1.jpg" alt="Sneaker Product"
+                                            loading="lazy">
+                                    <div class="product-overlay">
+                                            <button class="overlay-btn wishlist-btn" aria-label="Add to wishlist"><i
+                                                    class="far fa-heart"></i></button>
+                                            <button class="overlay-btn quick-view-btn" data-bs-toggle="modal"
+                                                data-bs-target="#quickViewModal" aria-label="Quick view"><i
+                                                    class="far fa-eye"></i></button>
+                                            <button class="overlay-btn add-to-cart-btn" aria-label="Add to cart"><i
+                                                    class="fas fa-shopping-cart"></i></button>
+                                    </div>
+                                </div>
+                                <div class="product-details">
+                                    <h5 class="product-title">Classic Leather Sneaker</h5>
+                                    <div class="product-rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star-half-alt"></i>
+                                    </div>
+                                    <p class="current-price">₦ 149.99</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                            <div class="product-card" data-product-id="sneakers-002">
+                                <div class="product-image">
+                                        <img src="assets/images/products/sneakers-1.jpg" alt="Sneaker Product"
+                                            loading="lazy">
+                                    <div class="product-overlay">
+                                            <button class="overlay-btn wishlist-btn" aria-label="Add to wishlist"><i
+                                                    class="far fa-heart"></i></button>
+                                            <button class="overlay-btn quick-view-btn" data-bs-toggle="modal"
+                                                data-bs-target="#quickViewModal" aria-label="Quick view"><i
+                                                    class="far fa-eye"></i></button>
+                                            <button class="overlay-btn add-to-cart-btn" aria-label="Add to cart"><i
+                                                    class="fas fa-shopping-cart"></i></button>
+                                    </div>
+                                </div>
+                                <div class="product-details">
+                                    <h5 class="product-title">Classic Leather Sneaker</h5>
+                                    <div class="product-rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star-half-alt"></i>
+                                    </div>
+                                    <p class="current-price">₦ 149.99</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                            <div class="product-card" data-product-id="sneakers-003">
+                                <div class="product-image">
+                                        <img src="assets/images/products/sneakers-1.jpg" alt="Sneaker Product"
+                                            loading="lazy">
+                                    <div class="product-overlay">
+                                            <button class="overlay-btn wishlist-btn" aria-label="Add to wishlist"><i
+                                                    class="far fa-heart"></i></button>
+                                            <button class="overlay-btn quick-view-btn" data-bs-toggle="modal"
+                                                data-bs-target="#quickViewModal" aria-label="Quick view"><i
+                                                    class="far fa-eye"></i></button>
+                                            <button class="overlay-btn add-to-cart-btn" aria-label="Add to cart"><i
+                                                    class="fas fa-shopping-cart"></i></button>
+                                    </div>
+                                </div>
+                                <div class="product-details">
+                                    <h5 class="product-title">Classic Leather Sneaker</h5>
+                                    <div class="product-rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star-half-alt"></i>
+                                    </div>
+                                    <p class="current-price">₦ 149.99</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Work & Safety tab -->
+            <div class="tab-pane fade" id="work">
+                <div class="products-slider">
+                        <div class="row g-4 slider-content">
+                            <!-- Product Card (repeat 4 times) -->
+                            <div class="col-lg-3 col-md-6">
+                                <div class="product-card" data-product-id="work-001">
+                                    <div class="product-image">
+                                        <img src="assets/images/products/work-1.jpg" alt="Work Boot Product"
+                                            loading="lazy">
+                                        <div class="product-overlay">
+                                            <button class="overlay-btn wishlist-btn" aria-label="Add to wishlist"><i
+                                                    class="far fa-heart"></i></button>
+                                            <button class="overlay-btn quick-view-btn" data-bs-toggle="modal"
+                                                data-bs-target="#quickViewModal" aria-label="Quick view"><i
+                                                    class="far fa-eye"></i></button>
+                                            <button class="overlay-btn add-to-cart-btn" aria-label="Add to cart"><i
+                                                    class="fas fa-shopping-cart"></i></button>
+                </div>
+            </div>
+                                    <div class="product-details">
+                                        <h5 class="product-title">Safety Work Boot</h5>
+                                        <div class="product-rating">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star-half-alt"></i>
+                                        </div>
+                                        <p class="current-price">₦ 179.99</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6">
+                                <div class="product-card" data-product-id="work-002">
+                                    <div class="product-image">
+                                        <img src="assets/images/products/work-2.jpg" alt="Work Boot Product"
+                                            loading="lazy">
+                                        <div class="product-overlay">
+                                            <button class="overlay-btn wishlist-btn" aria-label="Add to wishlist"><i
+                                                    class="far fa-heart"></i></button>
+                                            <button class="overlay-btn quick-view-btn" data-bs-toggle="modal"
+                                                data-bs-target="#quickViewModal" aria-label="Quick view"><i
+                                                    class="far fa-eye"></i></button>
+                                            <button class="overlay-btn add-to-cart-btn" aria-label="Add to cart"><i
+                                                    class="fas fa-shopping-cart"></i></button>
+                                        </div>
+                                    </div>
+                                    <div class="product-details">
+                                        <h5 class="product-title">Construction Work Boot</h5>
+                                        <div class="product-rating">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                        </div>
+                                        <p class="current-price">₦ 199.99</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6">
+                                <div class="product-card" data-product-id="work-003">
+                                    <div class="product-image">
+                                        <img src="assets/images/products/work-3.jpg" alt="Work Boot Product"
+                                            loading="lazy">
+                                        <div class="product-overlay">
+                                            <button class="overlay-btn wishlist-btn" aria-label="Add to wishlist"><i
+                                                    class="far fa-heart"></i></button>
+                                            <button class="overlay-btn quick-view-btn" data-bs-toggle="modal"
+                                                data-bs-target="#quickViewModal" aria-label="Quick view"><i
+                                                    class="far fa-eye"></i></button>
+                                            <button class="overlay-btn add-to-cart-btn" aria-label="Add to cart"><i
+                                                    class="fas fa-shopping-cart"></i></button>
+                                        </div>
+                                    </div>
+                                    <div class="product-details">
+                                        <h5 class="product-title">Waterproof Work Boot</h5>
+                                        <div class="product-rating">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="far fa-star"></i>
+                                        </div>
+                                        <p class="current-price">₦ 169.99</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+</section>
+<!-- Testimonials section -->
+<section class="testimonials py-5 bg-light">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="section-title">CLIENT FEEDBACK</h2>
+            <p class="section-subtitle">What our customers say about us</p>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                    <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel"
+                        data-bs-interval="5000">
+                    <div class="carousel-inner">
+                        <!-- Testimonial 1 -->
+                        <div class="carousel-item active">
+                            <div class="testimonial-card text-center">
+                                    <img src="assets/images/testimonials/client1.jpg" class="client-img" alt="Client 1"
+                                        loading="lazy">
+                                <div class="stars my-3">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                    <p class="testimonial-text">"Amazing collection of shoes! The quality is outstanding
+                                        and the customer service is exceptional. Will definitely shop here again!"</p>
+                                <h5 class="client-name mt-3">Sarah Johnson</h5>
+                                <p class="client-position">Regular Customer</p>
+                            </div>
+                        </div>
+
+                        <!-- Testimonial 2 -->
+                        <div class="carousel-item">
+                            <div class="testimonial-card text-center">
+                                    <img src="assets/images/testimonials/client2.jpg" class="client-img" alt="Client 2"
+                                        loading="lazy">
+                                <div class="stars my-3">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </div>
+                                    <p class="testimonial-text">"Great variety of shoes for the whole family. The prices
+                                        are reasonable and the quality is top-notch!"</p>
+                                <h5 class="client-name mt-3">Michael Brown</h5>
+                                <p class="client-position">Verified Buyer</p>
+                            </div>
+                        </div>
+                    </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel"
+                            data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon"></span>
+                    </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel"
+                            data-bs-slide="next">
+                        <span class="carousel-control-next-icon"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Partnership Section -->
+<section class="partnerships py-5">
+    <div class="container">
+        <!-- Desktop View -->
+            <div id="partnersSlider" class="carousel slide d-none d-md-block" data-bs-ride="carousel"
+                data-bs-interval="3000">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <div class="row align-items-center justify-content-center">
+                        <div class="col-md-3">
+                                <div class="partner-item">
+                                    <img src="assets/images/partners/nike.png" alt="Nike" class="img-fluid partner-logo"
+                                        loading="lazy">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                                <div class="partner-item">
+                                    <img src="assets/images/partners/adidas.png" alt="Adidas"
+                                        class="img-fluid partner-logo" loading="lazy">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                                <div class="partner-item">
+                                    <img src="assets/images/partners/puma.png" alt="Puma" class="img-fluid partner-logo"
+                                        loading="lazy">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                                <div class="partner-item">
+                                    <img src="assets/images/partners/reebok.png" alt="Reebok"
+                                        class="img-fluid partner-logo" loading="lazy">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="row align-items-center justify-content-center">
+                        <div class="col-md-3">
+                                <div class="partner-item">
+                                    <img src="assets/images/partners/newbalance.png" alt="New Balance"
+                                        class="img-fluid partner-logo" loading="lazy">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                                <div class="partner-item">
+                                    <img src="assets/images/partners/converse.png" alt="Converse"
+                                        class="img-fluid partner-logo" loading="lazy">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                                <div class="partner-item">
+                                    <img src="assets/images/partners/vans.png" alt="Vans" class="img-fluid partner-logo"
+                                        loading="lazy">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                                <div class="partner-item">
+                                    <img src="assets/images/partners/asics.png" alt="Asics"
+                                        class="img-fluid partner-logo" loading="lazy">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-indicators partner-indicators">
+                <button type="button" data-bs-target="#partnersSlider" data-bs-slide-to="0" class="active"></button>
+                <button type="button" data-bs-target="#partnersSlider" data-bs-slide-to="1"></button>
+            </div>
+        </div>
+
+        <!-- Mobile View -->
+            <div id="partnersSliderMobile" class="carousel slide d-md-none" data-bs-ride="carousel"
+                data-bs-interval="3000">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div class="partner-item">
+                            <img src="assets/images/partners/nike.png" alt="Nike" class="img-fluid partner-logo"
+                                loading="lazy">
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="partner-item">
+                            <img src="assets/images/partners/adidas.png" alt="Adidas" class="img-fluid partner-logo"
+                                loading="lazy">
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="partner-item">
+                            <img src="assets/images/partners/puma.png" alt="Puma" class="img-fluid partner-logo"
+                                loading="lazy">
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="partner-item">
+                            <img src="assets/images/partners/reebok.png" alt="Reebok" class="img-fluid partner-logo"
+                                loading="lazy">
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="partner-item">
+                            <img src="assets/images/partners/newbalance.png" alt="New Balance"
+                                class="img-fluid partner-logo" loading="lazy">
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="partner-item">
+                            <img src="assets/images/partners/converse.png" alt="Converse" class="img-fluid partner-logo"
+                                loading="lazy">
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="partner-item">
+                            <img src="assets/images/partners/vans.png" alt="Vans" class="img-fluid partner-logo"
+                                loading="lazy">
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="partner-item">
+                            <img src="assets/images/partners/asics.png" alt="Asics" class="img-fluid partner-logo"
+                                loading="lazy">
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-indicators partner-indicators">
+                    <button type="button" data-bs-target="#partnersSliderMobile" data-bs-slide-to="0"
+                        class="active"></button>
+                <button type="button" data-bs-target="#partnersSliderMobile" data-bs-slide-to="1"></button>
+                <button type="button" data-bs-target="#partnersSliderMobile" data-bs-slide-to="2"></button>
+                <button type="button" data-bs-target="#partnersSliderMobile" data-bs-slide-to="3"></button>
+                <button type="button" data-bs-target="#partnersSliderMobile" data-bs-slide-to="4"></button>
+                <button type="button" data-bs-target="#partnersSliderMobile" data-bs-slide-to="5"></button>
+                <button type="button" data-bs-target="#partnersSliderMobile" data-bs-slide-to="6"></button>
+                <button type="button" data-bs-target="#partnersSliderMobile" data-bs-slide-to="7"></button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Get Instant Updates Section -->
+<section class="updates-section py-5">
+    <div class="container">
+        <div class="updates-wrapper">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <div class="updates-content" data-aos="fade-right">
+                        <h2 class="section-title">Get Instant Updates</h2>
+                            <p class="section-subtitle">Stay ahead with the latest trends, exclusive offers, and new
+                                arrivals!</p>
+                        <div class="features">
+                            <div class="feature-item">
+                                <i class="fas fa-tag"></i>
+                                <span>Exclusive Discounts</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-bell"></i>
+                                <span>New Arrival Alerts</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-gift"></i>
+                                <span>Special Offers</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="subscription-form" data-aos="fade-left">
+                        <form>
+                            <div class="input-group">
+                                    <input type="email" class="form-control" placeholder="Enter your email address"
+                                        required>
+                                <button type="submit" class="btn subscribe-btn">
+                                    Subscribe
+                                    <i class="fas fa-paper-plane ms-2"></i>
+                                </button>
+                            </div>
+                        </form>
+                        <div class="form-note">
+                            <i class="fas fa-lock"></i>
+                            <small>We respect your privacy. Unsubscribe at any time.</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer Section -->
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <!-- Company Info -->
+            <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
+                <div class="footer-content">
+                    <h3 class="footer-logo">ShoePalace</h3>
+                        <p class="footer-desc">Your premier destination for quality footwear. Discover comfort, style,
+                            and excellence in every step.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-pinterest"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="col-lg-2 col-md-6 mb-4 mb-md-0">
+                <div class="footer-content">
+                    <h4 class="footer-title">Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Our Blog</a></li>
+                        <li><a href="#">Terms & Conditions</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Account -->
+            <div class="col-lg-2 col-md-6 mb-4 mb-md-0">
+                <div class="footer-content">
+                    <h4 class="footer-title">Account</h4>
+                    <ul class="footer-links">
+                        <li><a href="account.html">My Account</a></li>
+                        <li><a href="#">Order History</a></li>
+                        <li><a href="#">Shopping Cart</a></li>
+                        <li><a href="#">Wishlist</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Contact Info -->
+            <div class="col-lg-4 col-md-6">
+                <div class="footer-content">
+                    <h4 class="footer-title">Contact Info</h4>
+                    <ul class="contact-info">
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>123 Street Name, City, Country</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-phone-alt"></i>
+                            <span>+1 234 567 8900</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <span>info@shoepalace.com</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-clock"></i>
+                            <span>Mon - Fri: 9:00 AM - 6:00 PM</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Footer -->
+        <div class="footer-bottom">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <p class="copyright">© 2024 ShoePalace. All rights reserved.</p>
+                </div>
+                <div class="col-md-6">
+                    <div class="payment-methods">
+                            <img src="assets/images/payment/visa.png" alt="Visa" loading="lazy">
+                            <img src="assets/images/payment/mastercard.png" alt="Mastercard" loading="lazy">
+                            <img src="assets/images/payment/paypal.png" alt="PayPal" loading="lazy">
+                            <img src="assets/images/payment/amex.png" alt="American Express" loading="lazy">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-sidebar">
+        <div class="cart-header">
+            <h5>Shopping Cart</h5>
+            <button class="close-cart" aria-label="Close cart">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="cart-items">
+            <!-- Cart items will be dynamically added here -->
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span class="total-amount">₦ 0.00</span>
+            </div>
+            <button class="btn checkout-btn" aria-label="Proceed to checkout">
+                PROCEED TO CHECKOUT
+            </button>
+        </div>
+    </div>
+    <div class="cart-overlay"></div>
+
+    <!-- Scripts-->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- AOS Animation Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <!-- Custom Scripts -->
+    <script src="assets/js/preloader.js"></script>
+    <script src="assets/js/cart.js"></script>
+    <script src="assets/js/wishlist.js"></script>
+    <script src="assets/js/script.js"></script>
+    <script src="assets/js/account.js"></script>
+    <script src="assets/js/shop.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Initialize AOS
+            AOS.init({
+                duration: 800,
+                easing: 'ease-in-out',
+                once: true
+            });
+
+            // Initialize account
+            if (typeof account !== 'undefined') {
+                account.init();
+            }
+
+            if (typeof cart !== 'undefined') {
+                cart.init();
+            }
+
+            if (typeof wishlist !== 'undefined') {
+                wishlist.init();
+            }
+        });
+    </script>
+</body>
+
+</html>
