@@ -1,0 +1,256 @@
+/* About Hero Section */
+.about-hero {
+    background-color: var(--light-gray);
+    padding: 8rem 0 5rem;
+    text-align: center;
+}
+
+.about-hero-content h1 {
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+    color: var(--primary-color);
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.about-hero-content .lead {
+    font-size: 1.2rem;
+    color: #777;
+    max-width: 800px;
+    margin: 0 auto 2rem;
+    line-height: 1.8;
+}
+
+/* Stats Section */
+.stats-container {
+    margin-top: -50px;
+    position: relative;
+    z-index: 10;
+    margin-bottom: 3rem;
+}
+
+.stat-item {
+    background-color: var(--white);
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    padding: 2rem;
+    text-align: center;
+    transition: var(--transition);
+    height: 100%;
+}
+
+.stat-item:hover {
+    transform: translateY(-10px);
+}
+
+.stat-item h3 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--accent-color);
+    margin-bottom: 0.5rem;
+}
+
+.stat-item p {
+    color: #777;
+    font-size: 1.1rem;
+}
+
+/* Values Section */
+.value-card {
+    background-color: var(--white);
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    padding: 2rem;
+    margin-bottom: 2rem;
+    transition: var(--transition);
+    height: 100%;
+}
+
+.value-card:hover {
+    transform: translateY(-5px);
+}
+
+.value-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: rgba(231, 76, 60, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+}
+
+.value-icon i {
+    font-size: 2.5rem;
+    color: var(--accent-color);
+}
+
+/* Team Section */
+.team-card {
+    background-color: var(--white);
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    margin-bottom: 2rem;
+    transition: var(--transition);
+}
+
+.team-card:hover {
+    transform: translateY(-5px);
+}
+
+.team-image {
+    position: relative;
+    overflow: hidden;
+}
+
+.team-image img {
+    width: 100%;
+    height: auto;
+    transition: var(--transition);
+    aspect-ratio: 1/1;
+    object-fit: cover;
+}
+
+.team-card:hover .team-image img {
+    transform: scale(1.05);
+}
+
+.team-info {
+    padding: 1.5rem;
+    text-align: center;
+}
+
+.team-info h4 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+}
+
+.team-info p {
+    color: #777;
+    margin-bottom: 1rem;
+}
+
+.team-social {
+    display: flex;
+    justify-content: center;
+    gap: 0.7rem;
+}
+
+.team-social a {
+    color: #888;
+    transition: var(--transition);
+}
+
+.team-social a:hover {
+    color: var(--accent-color);
+    transform: translateY(-2px);
+}
+
+/* Timeline Section */
+.timeline {
+    position: relative;
+    padding: 3rem 0;
+    margin-top: 3rem;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 100%;
+    background-color: #eee;
+    z-index: -1;
+}
+
+.timeline-item {
+    margin-bottom: 4rem;
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+    width: 50%;
+}
+
+.timeline-item:nth-child(odd) {
+    align-self: flex-end;
+}
+
+.timeline-item:nth-child(even) {
+    align-self: flex-start;
+    margin-left: 50%;
+}
+
+.timeline-content {
+    background-color: var(--white);
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    padding: 2rem;
+    position: relative;
+    width: 90%;
+}
+
+.timeline-content::before {
+    content: '';
+    position: absolute;
+    top: 20px;
+    width: 20px;
+    height: 20px;
+    background-color: var(--white);
+    transform: rotate(45deg);
+}
+
+.timeline-item:nth-child(odd) .timeline-content::before {
+    right: -10px;
+}
+
+.timeline-item:nth-child(even) .timeline-content::before {
+    left: -10px;
+}
+
+.timeline-content h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+@media (max-width: 991.98px) {
+    .about-hero-content h1 {
+        font-size: 2.8rem;
+    }
+    
+    .stats-container {
+        margin-top: -30px;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .about-hero {
+        padding: 6rem 0 3rem;
+    }
+    
+    .stats-container {
+        margin-top: 0;
+    }
+    
+    .timeline::before {
+        left: 30px;
+    }
+    
+    .timeline-item {
+        width: 100%;
+        margin-left: 0;
+        justify-content: flex-start;
+        padding-left: 60px;
+    }
+    
+    .timeline-content::before {
+        display: none;
+    }
+} 

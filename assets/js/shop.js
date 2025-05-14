@@ -38,6 +38,28 @@ const shop = {
             });
         });
 
+        // Add to cart button handlers specifically for shop page
+        document.querySelectorAll('.add-to-cart-btn').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                const productCard = this.closest('.product-card');
+                if (!productCard) return;
+
+                const product = {
+                    id: productCard.dataset.productId,
+                    title: productCard.querySelector('.product-title')?.textContent,
+                    price: productCard.querySelector('.product-price')?.textContent,
+                    image: productCard.querySelector('.product-image img')?.src
+                };
+
+                if (product.id && product.title && product.price && product.image && typeof cart !== 'undefined') {
+                    cart.addItem(product);
+                }
+            });
+        });
+
         // Brand checkboxes
         document.querySelectorAll('.brand-filter input').forEach(checkbox => {
             checkbox.addEventListener('change', () => this.applyFilters());

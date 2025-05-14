@@ -1,0 +1,28 @@
+/* Main CSS File */
+/* Import base styles */
+@import url('base.css');
+
+/* Import navigation styles */
+@import url('navbar.css');
+
+/* Import footer styles */
+@import url('footer.css');
+
+/* Import page-specific styles */
+@import url('home.css');
+@import url('shop.css');
+@import url('about.css');
+@import url('account.css');
+@import url('contact.css');
+
+/* Import component styles */
+@import url('cart.css');
+
+/* Import external fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+
+/* Import animations */
+@import url('animations.css');
+
+/* Import responsive styles - should be last to override */
+@import url('responsive.css'); 

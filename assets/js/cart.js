@@ -28,6 +28,66 @@ const cart = {
             const handler = this.handleCartItemClick.bind(this);
             cartItems.addEventListener('click', handler);
         }
+
+        // Setup add to cart buttons
+        this.setupAddToCartListeners();
+    },
+
+    setupAddToCartListeners() {
+        // Define a separate handler function outside of the current context
+        function handleAddToCart(event, cart) {
+            event.preventDefault();
+            event.stopPropagation();
+            
+            const button = event.currentTarget;
+            const productCard = button.closest('.product-card');
+            
+            if (productCard) {
+                const productId = productCard.dataset.productId || productCard.getAttribute('data-product-id') || 'product-' + Math.random().toString(36).substr(2, 9);
+                const title = productCard.querySelector('.product-title').textContent;
+                const priceEl = productCard.querySelector('.product-price');
+                const price = priceEl.querySelector('.current-price') ? 
+                    priceEl.querySelector('.current-price').textContent : 
+                    priceEl.textContent;
+                const image = productCard.querySelector('.product-image img').src;
+                const brand = productCard.querySelector('.product-brand')?.textContent || '';
+                
+                const productData = {
+                    id: productId,
+                    title: title,
+                    price: price,
+                    image: image,
+                    brand: brand,
+                    quantity: 1
+                };
+                
+                cart.addItem(productData);
+            } else {
+                console.error('Could not find product card');
+            }
+        }
+
+        // Remove any existing add to cart buttons added through inline onclick attributes
+        const productCards = document.querySelectorAll('.product-card');
+        productCards.forEach(card => {
+            // Only keep ONE add to cart button functional per product
+            // Disable overlay button
+            const overlayBtn = card.querySelector('.product-actions .add-to-cart-btn');
+            if (overlayBtn) {
+                overlayBtn.style.display = 'none';
+            }
+            
+            // Keep bottom button and add listener
+            const mainBtn = card.querySelector('.product-info .add-to-cart-btn');
+            if (mainBtn) {
+                // Clear any existing listeners
+                mainBtn.replaceWith(mainBtn.cloneNode(true));
+                // Get the fresh element
+                const newBtn = card.querySelector('.product-info .add-to-cart-btn');
+                // Add listener
+                newBtn.addEventListener('click', (e) => handleAddToCart(e, this));
+            }
+        });
     },
 
     setupCartSidebar() {

@@ -9,9 +9,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/responsive.css">
-    <link rel="stylesheet" href="assets/css/animations.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/preloader.css">
 </head>
 <body>
     <!-- Navbar -->
@@ -72,13 +71,14 @@
     <!-- Shop Header -->
     <section class="shop-header py-5">
         <div class="container">
-                    <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
                     <li class="breadcrumb-item active">Shop</li>
-                        </ol>
-                    </nav>
-            <h1 class="shop-title">Our Collection</h1>
+                </ol>
+            </nav>
+            <h1 class="shop-title">Discover Our Premium Collection</h1>
+            <p class="lead text-muted">Find the perfect shoes for every occasion</p>
         </div>
     </section>
 
@@ -89,67 +89,87 @@
                 <!-- Sidebar - Hidden on Mobile -->
                 <div class="col-lg-3 d-none d-lg-block">
                     <!-- Categories -->
-                    <div class="sidebar-widget mb-4">
+                    <div class="sidebar-widget">
                         <h4>Categories</h4>
                         <div class="category-buttons">
-                        <button class="btn btn-outline-primary w-100 mb-2" data-category="men">
-                            Men's Collection <span class="badge bg-secondary">2</span>
-                        </button>
-                            <button class="btn btn-outline-primary w-100 mb-2" data-category="women">
-                            Women's Collection <span class="badge bg-secondary">2</span>
+                            <button class="btn btn-outline-primary w-100" data-category="men">
+                                Men's Collection <span class="badge">12</span>
                             </button>
-                        <button class="btn btn-outline-primary w-100 mb-2" data-category="kids">
-                            Kids Collection <span class="badge bg-secondary">2</span>
-                        </button>
+                            <button class="btn btn-outline-primary w-100" data-category="women">
+                                Women's Collection <span class="badge">15</span>
+                            </button>
+                            <button class="btn btn-outline-primary w-100" data-category="kids">
+                                Kids Collection <span class="badge">9</span>
+                            </button>
+                            <button class="btn btn-outline-primary w-100" data-category="sports">
+                                Sports <span class="badge">7</span>
+                            </button>
+                            <button class="btn btn-outline-primary w-100" data-category="casual">
+                                Casual <span class="badge">11</span>
+                            </button>
                         </div>
                     </div>
 
                     <!-- Brands -->
-                    <div class="sidebar-widget mb-4">
+                    <div class="sidebar-widget">
                         <h4>Brands</h4>
                         <div class="brand-filter">
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" value="nike" id="nike">
                                 <label class="form-check-label" for="nike">
-                                    Nike <span class="count">(3)</span>
+                                    Nike <span class="count">(24)</span>
                                 </label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" value="adidas" id="adidas">
                                 <label class="form-check-label" for="adidas">
-                                    Adidas <span class="count">(2)</span>
+                                    Adidas <span class="count">(18)</span>
                                 </label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" value="puma" id="puma">
                                 <label class="form-check-label" for="puma">
-                                    Puma <span class="count">(1)</span>
+                                    Puma <span class="count">(12)</span>
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="reebok" id="reebok">
+                                <label class="form-check-label" for="reebok">
+                                    Reebok <span class="count">(9)</span>
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="newbalance" id="newbalance">
+                                <label class="form-check-label" for="newbalance">
+                                    New Balance <span class="count">(7)</span>
                                 </label>
                             </div>
                         </div>
                     </div>
                     
                     <!-- Colors -->
-                    <div class="sidebar-widget mb-4">
+                    <div class="sidebar-widget">
                         <h4>Colors</h4>
                         <div class="color-filter">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="black" id="black">
-                                <label class="form-check-label" for="black">
-                                    Black <span class="count">(1)</span>
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="white" id="white">
-                                <label class="form-check-label" for="white">
-                                    White <span class="count">(1)</span>
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="red" id="red">
-                                <label class="form-check-label" for="red">
-                                    Red <span class="count">(1)</span>
-                                </label>
+                            <button class="color-btn" style="background-color: #000000;" title="Black"></button>
+                            <button class="color-btn" style="background-color: #FFFFFF;" title="White"></button>
+                            <button class="color-btn" style="background-color: #FF0000;" title="Red"></button>
+                            <button class="color-btn" style="background-color: #0000FF;" title="Blue"></button>
+                            <button class="color-btn" style="background-color: #008000;" title="Green"></button>
+                            <button class="color-btn" style="background-color: #FFA500;" title="Orange"></button>
+                            <button class="color-btn" style="background-color: #800080;" title="Purple"></button>
+                            <button class="color-btn" style="background-color: #FFC0CB;" title="Pink"></button>
+                        </div>
+                    </div>
+
+                    <!-- Price Range -->
+                    <div class="sidebar-widget">
+                        <h4>Price Range</h4>
+                        <div class="price-range-slider">
+                            <input type="range" class="form-range" min="0" max="100000" step="1000" id="priceRange">
+                            <div class="d-flex justify-content-between mt-2">
+                                <span>₦5,000</span>
+                                <span>₦100,000</span>
                             </div>
                         </div>
                     </div>
@@ -161,43 +181,46 @@
                     <div class="shop-controls mb-4">
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="showing-results">
-                                Showing <span class="product-count">0</span> Products
+                                Showing <span class="product-count">6</span> out of <span>54</span> Products
                             </div>
                             <div class="d-flex gap-3">
-                                <select class="form-select" id="sortSelect">
+                                <select class="form-select sort-select" id="sortSelect">
                                     <option value="popularity">Sort by Popularity</option>
                                     <option value="newest">Newest First</option>
                                     <option value="price-low">Price: Low to High</option>
                                     <option value="price-high">Price: High to Low</option>
+                                    <option value="rating">Highest Rated</option>
                                 </select>
                                 <button class="btn btn-primary d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#filterOffcanvas">
                                     <i class="fas fa-filter"></i> Filter
-                                        </button>
+                                </button>
                             </div>
                         </div>
                     </div>
 
                     <!-- Product Grid -->
                     <div class="row g-4" id="productGrid">
+                        <!-- Product 1 -->
                         <div class="col-md-6 col-lg-4" data-category="men" data-brand="nike" data-color="black" data-price="29999" data-date="20240101" data-reviews="45">
-                            <div class="product-card" data-product-id="m1">
+                            <div class="product-card" data-product-id="men-nike-airmax">
                                 <div class="product-image">
+                                    <span class="product-tag new">New</span>
                                     <img src="assets/images/products/men-1.jpg" alt="Nike Air Max" class="img-fluid">
                                     <div class="product-actions">
-                                        <button class="btn wishlist-btn">
+                                        <button class="wishlist-btn" style="--i:0">
                                             <i class="far fa-heart"></i>
                                         </button>
-                                        <button class="btn quick-view-btn" data-bs-toggle="modal" 
-                                            data-bs-target="#quickViewModal">
+                                        <button class="quick-view-btn" data-bs-toggle="modal" data-bs-target="#quickViewModal" style="--i:1">
                                             <i class="far fa-eye"></i>
                                         </button>
-                                        <button class="btn add-to-cart-btn">
-                                            <i class="fas fa-shopping-cart"></i>
+                                        <button class="view-product-btn" style="--i:2">
+                                            <i class="fas fa-info-circle"></i>
                                         </button>
                                     </div>
                                 </div>
-                                <div class="product-info p-3">
-                                    <h5 class="product-title">Nike Air Max</h5>
+                                <div class="product-info">
+                                    <span class="product-brand">Nike</span>
+                                    <h5 class="product-title">Nike Air Max 90</h5>
                                     <div class="product-rating" data-rating="4.5">
                                         <i class="fas fa-star"></i>
                                         <i class="fas fa-star"></i>
@@ -207,23 +230,33 @@
                                         <span class="reviews">(45)</span>
                                     </div>
                                     <div class="product-price">₦29,999</div>
+                                    <button class="btn btn-primary add-to-cart-btn">
+                                        <i class="fas fa-shopping-cart"></i> Add to Cart
+                                    </button>
                                 </div>
                             </div>
                         </div>
+                        
+                        <!-- Product 2 -->
                         <div class="col-md-6 col-lg-4" data-category="women" data-brand="nike" data-color="pink" data-price="27999" data-date="20240110" data-reviews="42">
-                            <div class="product-card" data-product-id="w1">
+                            <div class="product-card" data-product-id="women-nike-freerun">
                                 <div class="product-image">
+                                    <span class="product-tag sale">Sale</span>
                                     <img src="assets/images/products/women-1.jpg" alt="Nike Free Run" class="img-fluid">
                                     <div class="product-actions">
-                                        <!-- <button class="btn wishlist-btn">
+                                        <button class="wishlist-btn" style="--i:0">
                                             <i class="far fa-heart"></i>
-                                        </button> -->
-                                        <button class="btn add-to-cart-btn">
-                                            <i class="fas fa-shopping-cart"></i>
+                                        </button>
+                                        <button class="quick-view-btn" data-bs-toggle="modal" data-bs-target="#quickViewModal" style="--i:1">
+                                            <i class="far fa-eye"></i>
+                                        </button>
+                                        <button class="view-product-btn" style="--i:2">
+                                            <i class="fas fa-info-circle"></i>
                                         </button>
                                     </div>
                                 </div>
-                                <div class="product-info p-3">
+                                <div class="product-info">
+                                    <span class="product-brand">Nike</span>
                                     <h5 class="product-title">Nike Free Run</h5>
                                     <div class="product-rating" data-rating="4.5">
                                         <i class="fas fa-star"></i>
@@ -233,24 +266,36 @@
                                         <i class="fas fa-star-half-alt"></i>
                                         <span class="reviews">(42)</span>
                                     </div>
-                                    <div class="product-price">₦27,999</div>
+                                    <div class="product-price">
+                                        <span class="current-price">₦27,999</span>
+                                        <span class="original-price">₦32,999</span>
+                                    </div>
+                                    <button class="btn btn-primary add-to-cart-btn">
+                                        <i class="fas fa-shopping-cart"></i> Add to Cart
+                                    </button>
                                 </div>
                             </div>
                         </div>
+                        
+                        <!-- Product 3 -->
                         <div class="col-md-6 col-lg-4" data-category="kids" data-brand="adidas" data-color="blue" data-price="19999" data-date="20240120" data-reviews="28">
-                            <div class="product-card" data-product-id="k1">
+                            <div class="product-card" data-product-id="kids-adidas-runner">
                                 <div class="product-image">
                                     <img src="assets/images/products/kids-1.jpg" alt="Adidas Kids Runner" class="img-fluid">
                                     <div class="product-actions">
-                                        <!-- <button class="btn wishlist-btn">
+                                        <button class="wishlist-btn" style="--i:0">
                                             <i class="far fa-heart"></i>
-                                        </button> -->
-                                        <button class="btn add-to-cart-btn">
-                                            <i class="fas fa-shopping-cart"></i>
+                                        </button>
+                                        <button class="quick-view-btn" data-bs-toggle="modal" data-bs-target="#quickViewModal" style="--i:1">
+                                            <i class="far fa-eye"></i>
+                                        </button>
+                                        <button class="view-product-btn" style="--i:2">
+                                            <i class="fas fa-info-circle"></i>
                                         </button>
                                     </div>
                                 </div>
-                                <div class="product-info p-3">
+                                <div class="product-info">
+                                    <span class="product-brand">Adidas</span>
                                     <h5 class="product-title">Adidas Kids Runner</h5>
                                     <div class="product-rating" data-rating="4.5">
                                         <i class="fas fa-star"></i>
@@ -261,11 +306,145 @@
                                         <span class="reviews">(28)</span>
                                     </div>
                                     <div class="product-price">₦19,999</div>
+                                    <button class="btn btn-primary add-to-cart-btn">
+                                        <i class="fas fa-shopping-cart"></i> Add to Cart
+                                    </button>
                                 </div>
                             </div>
                         </div>
-                        <!-- Continue with similar blocks for other products... -->
+                        
+                        <!-- Product 4 -->
+                        <div class="col-md-6 col-lg-4" data-category="men" data-brand="adidas" data-color="white" data-price="32999" data-date="20240115" data-reviews="37">
+                            <div class="product-card" data-product-id="men-adidas-superstar">
+                                <div class="product-image">
+                                    <img src="assets/images/products/men-1.jpg" alt="Adidas Superstar" class="img-fluid">
+                                    <div class="product-actions">
+                                        <button class="wishlist-btn" style="--i:0">
+                                            <i class="far fa-heart"></i>
+                                        </button>
+                                        <button class="quick-view-btn" data-bs-toggle="modal" data-bs-target="#quickViewModal" style="--i:1">
+                                            <i class="far fa-eye"></i>
+                                        </button>
+                                        <button class="view-product-btn" style="--i:2">
+                                            <i class="fas fa-info-circle"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <span class="product-brand">Adidas</span>
+                                    <h5 class="product-title">Adidas Superstar</h5>
+                                    <div class="product-rating" data-rating="4.5">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star-half-alt"></i>
+                                        <span class="reviews">(37)</span>
+                                    </div>
+                                    <div class="product-price">₦32,999</div>
+                                    <button class="btn btn-primary add-to-cart-btn">
+                                        <i class="fas fa-shopping-cart"></i> Add to Cart
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Product 5 -->
+                        <div class="col-md-6 col-lg-4" data-category="women" data-brand="puma" data-color="red" data-price="25999" data-date="20240105" data-reviews="31">
+                            <div class="product-card" data-product-id="women-puma-cali">
+                                <div class="product-image">
+                                    <span class="product-tag sale">Sale</span>
+                                    <img src="assets/images/products/women-1.jpg" alt="Puma Cali Sport" class="img-fluid">
+                                    <div class="product-actions">
+                                        <button class="wishlist-btn" style="--i:0">
+                                            <i class="far fa-heart"></i>
+                                        </button>
+                                        <button class="quick-view-btn" data-bs-toggle="modal" data-bs-target="#quickViewModal" style="--i:1">
+                                            <i class="far fa-eye"></i>
+                                        </button>
+                                        <button class="view-product-btn" style="--i:2">
+                                            <i class="fas fa-info-circle"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <span class="product-brand">Puma</span>
+                                    <h5 class="product-title">Puma Cali Sport</h5>
+                                    <div class="product-rating" data-rating="4.5">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star-half-alt"></i>
+                                        <span class="reviews">(31)</span>
+                                    </div>
+                                    <div class="product-price">
+                                        <span class="current-price">₦25,999</span>
+                                        <span class="original-price">₦29,999</span>
+                                    </div>
+                                    <button class="btn btn-primary add-to-cart-btn">
+                                        <i class="fas fa-shopping-cart"></i> Add to Cart
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Product 6 -->
+                        <div class="col-md-6 col-lg-4" data-category="kids" data-brand="reebok" data-color="green" data-price="18999" data-date="20240125" data-reviews="22">
+                            <div class="product-card" data-product-id="kids-reebok-classic">
+                                <div class="product-image">
+                                    <span class="product-tag new">New</span>
+                                    <img src="assets/images/products/kids-1.jpg" alt="Reebok Kids Classic" class="img-fluid">
+                                    <div class="product-actions">
+                                        <button class="wishlist-btn" style="--i:0">
+                                            <i class="far fa-heart"></i>
+                                        </button>
+                                        <button class="quick-view-btn" data-bs-toggle="modal" data-bs-target="#quickViewModal" style="--i:1">
+                                            <i class="far fa-eye"></i>
+                                        </button>
+                                        <button class="view-product-btn" style="--i:2">
+                                            <i class="fas fa-info-circle"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <span class="product-brand">Reebok</span>
+                                    <h5 class="product-title">Reebok Kids Classic</h5>
+                                    <div class="product-rating" data-rating="4.5">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star-half-alt"></i>
+                                        <span class="reviews">(22)</span>
+                                    </div>
+                                    <div class="product-price">₦18,999</div>
+                                    <button class="btn btn-primary add-to-cart-btn">
+                                        <i class="fas fa-shopping-cart"></i> Add to Cart
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                    
+                    <!-- Pagination -->
+                    <nav class="mt-5">
+                        <ul class="pagination justify-content-center">
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">
+                                    <i class="fas fa-chevron-left"></i>
+                                </a>
+                            </li>
+                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="#">
+                                    <i class="fas fa-chevron-right"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
                 </div>
             </div>
         </div>
