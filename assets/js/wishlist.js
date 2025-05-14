@@ -10,206 +10,181 @@ const wishlist = {
         try {
             const savedItems = localStorage.getItem('wishlist');
             this.items = savedItems ? JSON.parse(savedItems) : [];
+            this.setupEventListeners();
+            this.updateWishlistBtns();
         } catch (error) {
-            console.error('Error loading wishlist:', error);
+            console.error('Error initializing wishlist:', error);
             this.items = [];
+            this.saveWishlist();
         }
-        
-        this.updateWishlistButtons();
-        this.loadWishlist();
-        this.setupEventListeners();
     },
 
     setupEventListeners() {
-        // Setup event delegation for wishlist items container
-        const wishlistGrid = document.querySelector('.wishlist-grid');
-        if (wishlistGrid) {
-            wishlistGrid.addEventListener('click', this.handleWishlistItemClick.bind(this));
-        }
-
-        // Setup wishlist button event listeners
-        document.addEventListener('click', (e) => {
-            const wishlistBtn = e.target.closest('.wishlist-btn');
-            if (wishlistBtn) {
+        // Setup wishlist buttons on product cards
+        document.querySelectorAll('.wishlist-btn:not(.related-wishlist-btn)').forEach(btn => {
+            // Skip already initialized buttons
+            if (btn.dataset.initialized === 'true') return;
+            
+            btn.dataset.initialized = 'true';
+            
+            btn.addEventListener('click', (e) => {
                 e.preventDefault();
-                const productCard = wishlistBtn.closest('.product-card');
+                e.stopPropagation();
+                
+                const productCard = btn.closest('.product-card');
                 if (!productCard) return;
-
-                const product = {
-                    id: productCard.dataset.productId,
-                    title: productCard.querySelector('.product-title')?.textContent,
-                    price: parseFloat(productCard.querySelector('.current-price')?.textContent.replace(/[^\d.]/g, '')) || 0,
-                    image: productCard.querySelector('.product-image img')?.src
-                };
-
-                if (product.id && product.title && product.price && product.image) {
-                    this.toggleItem(product);
+                
+                const productId = productCard.dataset.productId;
+                const productTitle = productCard.querySelector('.product-title')?.textContent;
+                const productPrice = productCard.querySelector('.product-price')?.textContent;
+                const productImage = productCard.querySelector('.product-image img')?.src;
+                const productBrand = productCard.querySelector('.product-brand')?.textContent;
+                
+                if (!productId || !productTitle || !productPrice || !productImage) {
+                    console.error('Missing product data for wishlist');
+                    return;
                 }
-            }
+                
+                const product = {
+                    id: productId,
+                    title: productTitle,
+                    price: productPrice,
+                    image: productImage,
+                    brand: productBrand || 'ShoePalace'
+                };
+                
+                this.toggleItem(product);
+                
+                // Toggle heart icon
+                const icon = btn.querySelector('i');
+                if (icon) {
+                    icon.classList.toggle('far');
+                    icon.classList.toggle('fas');
+                    icon.classList.toggle('text-danger');
+                }
+            });
         });
-    },
-
-    handleWishlistItemClick(e) {
-        const removeBtn = e.target.closest('.remove-from-wishlist');
-        if (removeBtn) {
-            const productId = removeBtn.dataset.id;
-            this.removeItem(productId);
-        }
-
-        const addToCartBtn = e.target.closest('.add-to-cart');
-        if (addToCartBtn) {
-            const productId = addToCartBtn.dataset.id;
-            const item = this.items.find(item => item.id === productId);
-            if (item && typeof cart !== 'undefined') {
-                cart.addItem(item);
-            }
+        
+        // Setup wishlist nav button if present
+        const wishlistNavBtn = document.querySelector('.wishlist-nav-btn');
+        if (wishlistNavBtn) {
+            wishlistNavBtn.addEventListener('click', () => {
+                window.location.href = 'account.html#wishlist';
+            });
         }
     },
 
     toggleItem(product) {
-        const index = this.items.findIndex(item => item.id === product.id);
-        const wishlistBtn = document.querySelector(`.wishlist-btn[data-product-id="${product.id}"]`);
+        if (!product || !product.id) return;
         
-        if (index === -1) {
-            // Add to wishlist
-            this.items.push(product);
-            if (wishlistBtn) {
-                const icon = wishlistBtn.querySelector('i');
-                if (icon) {
-                    icon.classList.remove('far');
-                    icon.classList.add('fas');
-                }
-                wishlistBtn.classList.add('active');
-            }
-            this.showWishlistNotification('Added to wishlist');
-        } else {
+        const index = this.findItemIndex(product.id);
+        
+        if (index !== -1) {
             // Remove from wishlist
             this.items.splice(index, 1);
-            if (wishlistBtn) {
-                const icon = wishlistBtn.querySelector('i');
-                if (icon) {
-                    icon.classList.remove('fas');
-                    icon.classList.add('far');
-                }
-                wishlistBtn.classList.remove('active');
-            }
             this.showWishlistNotification('Removed from wishlist');
+        } else {
+            // Add to wishlist
+            this.items.push({
+                id: product.id,
+                title: product.title,
+                price: this.extractPrice(product.price),
+                image: product.image,
+                brand: product.brand || '',
+                addedAt: new Date().toISOString()
+            });
+            this.showWishlistNotification('Added to wishlist');
         }
-
+        
         this.saveWishlist();
-        this.loadWishlist();
+        this.updateWishlistBtns();
     },
 
-    removeItem(productId) {
-        const index = this.items.findIndex(item => item.id === productId);
-        if (index !== -1) {
-            this.items.splice(index, 1);
-            this.saveWishlist();
-            this.loadWishlist();
-            this.updateWishlistButtons();
-            this.showWishlistNotification('Removed from wishlist');
+    findItemIndex(productId) {
+        return this.items.findIndex(item => item.id === productId);
+    },
+
+    isInWishlist(productId) {
+        return this.findItemIndex(productId) !== -1;
+    },
+
+    extractPrice(price) {
+        // Handle price - could be a number or string with currency symbol
+        if (typeof price === 'number') {
+            return price;
+        } else if (typeof price === 'string') {
+            // Remove currency symbol and parse
+            const parsedPrice = parseFloat(price.replace(/[^\d.]/g, ''));
+            return isNaN(parsedPrice) ? 0 : parsedPrice;
         }
+        return 0;
     },
 
-    updateWishlistButtons() {
+    saveWishlist() {
+        localStorage.setItem('wishlist', JSON.stringify(this.items));
+    },
+
+    updateWishlistBtns() {
+        // Update all wishlist buttons to reflect current state
         document.querySelectorAll('.wishlist-btn').forEach(btn => {
-            const productId = btn.dataset.productId;
+            const productCard = btn.closest('.product-card');
+            if (!productCard) return;
+            
+            const productId = productCard.dataset.productId;
+            if (!productId) return;
+            
+            const isInWishlist = this.isInWishlist(productId);
             const icon = btn.querySelector('i');
-            const isInWishlist = this.items.some(item => item.id === productId);
             
             if (icon) {
                 if (isInWishlist) {
                     icon.classList.remove('far');
                     icon.classList.add('fas');
-                    btn.classList.add('active');
+                    icon.classList.add('text-danger');
                 } else {
-                    icon.classList.remove('fas');
                     icon.classList.add('far');
-                    btn.classList.remove('active');
+                    icon.classList.remove('fas');
+                    icon.classList.remove('text-danger');
                 }
             }
         });
     },
 
-    loadWishlist() {
-        const wishlistGrid = document.querySelector('.wishlist-grid');
-        if (!wishlistGrid) return;
-
-        try {
-            if (this.items.length === 0) {
-                wishlistGrid.innerHTML = `
-                    <div class="empty-wishlist">
-                        <i class="far fa-heart"></i>
-                        <p>Your wishlist is empty</p>
-                    </div>
-                `;
-                return;
-            }
-
-            wishlistGrid.innerHTML = this.items.map(item => {
-                const price = typeof item.price === 'string' ? 
-                    parseFloat(item.price.replace(/[^\d.]/g, '')) : 
-                    item.price || 0;
-
-                return `
-                    <div class="wishlist-item">
-                        <div class="wishlist-item-image">
-                            <img src="${this.sanitizeUrl(item.image)}" alt="${this.sanitizeHtml(item.title)}">
-                        </div>
-                        <div class="wishlist-item-details">
-                            <h4>${this.sanitizeHtml(item.title)}</h4>
-                            <div class="wishlist-item-price">₦${price.toLocaleString()}</div>
-                            <div class="wishlist-item-actions">
-                                <button class="btn btn-primary add-to-cart" data-id="${item.id}">
-                                    <i class="fas fa-shopping-cart"></i> Add to Cart
-                                </button>
-                                <button class="btn btn-danger remove-from-wishlist" data-id="${item.id}">
-                                    <i class="fas fa-trash"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                `;
-            }).join('');
-        } catch (error) {
-            console.error('Error rendering wishlist:', error);
-            wishlistGrid.innerHTML = '<div class="error">Error loading wishlist</div>';
-        }
-    },
-
-    sanitizeHtml(str) {
-        const div = document.createElement('div');
-        div.textContent = str;
-        return div.innerHTML;
-    },
-
-    sanitizeUrl(url) {
-        try {
-            const parsed = new URL(url);
-            return parsed.toString();
-        } catch (e) {
-            return '#';
-        }
-    },
-
-    saveWishlist() {
-        try {
-            localStorage.setItem('wishlist', JSON.stringify(this.items));
-        } catch (error) {
-            console.error('Error saving wishlist:', error);
-        }
-    },
-
     showWishlistNotification(message) {
+        // Check if we already have the product-notification function from product-detail.js
+        if (typeof showNotification === 'function') {
+            showNotification(message, 'success');
+            return;
+        }
+        
+        // Otherwise implement our own notification
         const notification = document.createElement('div');
-        notification.className = 'wishlist-notification';
+        notification.className = 'product-notification success';
         notification.textContent = message;
+        
+        // Remove any existing notifications
+        document.querySelectorAll('.product-notification').forEach(el => el.remove());
+        
         document.body.appendChild(notification);
-
-        // Remove notification after animation
+        
+        // Animate in
+        setTimeout(() => notification.classList.add('show'), 10);
+        
+        // Remove after 3 seconds
         setTimeout(() => {
-            notification.remove();
-        }, 2000);
+            notification.classList.remove('show');
+            setTimeout(() => notification.remove(), 300);
+        }, 3000);
+    },
+
+    getWishlistItems() {
+        return [...this.items];
+    },
+
+    clearWishlist() {
+        this.items = [];
+        this.saveWishlist();
+        this.updateWishlistBtns();
     }
 };
 

@@ -31,6 +31,14 @@ const cart = {
 
         // Setup add to cart buttons
         this.setupAddToCartListeners();
+        
+        // Setup open cart links in footer
+        document.querySelectorAll('.open-cart').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                this.openCartSidebar();
+            });
+        });
     },
 
     setupAddToCartListeners() {
@@ -79,22 +87,30 @@ const cart = {
         const checkoutBtn = document.querySelector('.checkout-btn');
 
         if (cartBtn && cartSidebar && cartOverlay && closeCart && checkoutBtn) {
-            const openCart = () => {
-                cartSidebar.classList.add('active');
-                cartOverlay.classList.add('active');
-                document.body.style.overflow = 'hidden';
-            };
-
-            const closeCartSidebar = () => {
-                cartSidebar.classList.remove('active');
-                cartOverlay.classList.remove('active');
-                document.body.style.overflow = '';
-            };
-
-            cartBtn.addEventListener('click', openCart);
-            closeCart.addEventListener('click', closeCartSidebar);
-            cartOverlay.addEventListener('click', closeCartSidebar);
+            cartBtn.addEventListener('click', () => this.openCartSidebar());
+            closeCart.addEventListener('click', () => this.closeCartSidebar());
+            cartOverlay.addEventListener('click', () => this.closeCartSidebar());
             checkoutBtn.addEventListener('click', () => this.checkoutCart());
+        }
+    },
+
+    openCartSidebar() {
+        const cartSidebar = document.querySelector('.cart-sidebar');
+        const cartOverlay = document.querySelector('.cart-overlay');
+        if (cartSidebar && cartOverlay) {
+            cartSidebar.classList.add('active');
+            cartOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+    },
+
+    closeCartSidebar() {
+        const cartSidebar = document.querySelector('.cart-sidebar');
+        const cartOverlay = document.querySelector('.cart-overlay');
+        if (cartSidebar && cartOverlay) {
+            cartSidebar.classList.remove('active');
+            cartOverlay.classList.remove('active');
+            document.body.style.overflow = '';
         }
     },
 
@@ -322,10 +338,7 @@ const cart = {
             this.showCartNotification('Please log in to complete your purchase');
             
             // Close cart sidebar
-            const cartSidebar = document.querySelector('.cart-sidebar');
-            const cartOverlay = document.querySelector('.cart-overlay');
-            if (cartSidebar) cartSidebar.classList.remove('active');
-            if (cartOverlay) cartOverlay.classList.remove('active');
+            this.closeCartSidebar();
             
             // Redirect to account page after a brief delay
             setTimeout(() => {
@@ -335,10 +348,7 @@ const cart = {
         }
 
         // Close cart sidebar
-        const cartSidebar = document.querySelector('.cart-sidebar');
-        const cartOverlay = document.querySelector('.cart-overlay');
-        if (cartSidebar) cartSidebar.classList.remove('active');
-        if (cartOverlay) cartOverlay.classList.remove('active');
+        this.closeCartSidebar();
         
         // Redirect to checkout page
         window.location.href = 'checkout.html';
