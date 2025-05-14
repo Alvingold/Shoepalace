@@ -754,12 +754,44 @@ document.addEventListener('DOMContentLoaded', function() {
         
         document.body.appendChild(notification);
         
+        // Style the notification directly via JS to ensure consistency
+        notification.style.position = 'fixed';
+        notification.style.bottom = '30px';
+        notification.style.right = '20px';
+        notification.style.padding = '1rem 1.5rem';
+        notification.style.borderRadius = '8px';
+        notification.style.background = '#fff';
+        notification.style.boxShadow = '0 5px 15px rgba(0,0,0,0.1)';
+        notification.style.zIndex = '1060';
+        notification.style.maxWidth = '350px';
+        notification.style.transform = 'translateX(110%)';
+        notification.style.transition = 'transform 0.3s ease-out';
+        
+        // Set border color based on notification type
+        if (type === 'success') {
+            notification.style.borderLeft = '4px solid #28a745';
+        } else if (type === 'warning') {
+            notification.style.borderLeft = '4px solid #ffc107';
+        } else if (type === 'error') {
+            notification.style.borderLeft = '4px solid #dc3545';
+        }
+        
+        // Handle mobile responsiveness
+        if (window.innerWidth <= 768) {
+            notification.style.left = '20px';
+            notification.style.right = '20px';
+            notification.style.bottom = '20px';
+            notification.style.maxWidth = 'none';
+        }
+        
         // Animate in
-        setTimeout(() => notification.classList.add('show'), 10);
+        setTimeout(() => {
+            notification.style.transform = 'translateX(0)';
+        }, 10);
         
         // Remove after 3 seconds
         setTimeout(() => {
-            notification.classList.remove('show');
+            notification.style.transform = 'translateX(110%)';
             setTimeout(() => notification.remove(), 300);
         }, 3000);
     }

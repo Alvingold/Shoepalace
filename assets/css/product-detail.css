@@ -488,7 +488,7 @@
 /* Notification styles */
 .product-notification {
     position: fixed;
-    top: 80px;
+    bottom: 30px;
     right: 20px;
     padding: 1rem 1.5rem;
     border-radius: 8px;
@@ -565,7 +565,7 @@
     }
     
     .product-notification {
-        top: 70px;
+        bottom: 20px;
         left: 20px;
         right: 20px;
         max-width: none;
