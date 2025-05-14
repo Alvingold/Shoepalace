@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const product = {
                 id: productCard.dataset.productId,
                 title: productCard.querySelector('.product-title')?.textContent,
-                price: productCard.querySelector('.product-price')?.textContent,
+                price: parseFloat(productCard.querySelector('.current-price')?.textContent.replace(/[^\d.]/g, '')) || 0,
                 image: productCard.querySelector('.product-image img')?.src
             };
 

@@ -30,6 +30,11 @@ const shop = {
             });
         });
 
+        // Reset filter buttons
+        document.querySelectorAll('.reset-filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => this.resetFilters());
+        });
+
         // Product click handling
         document.querySelectorAll('.product-card').forEach(card => {
             card.addEventListener('click', (e) => {
@@ -138,6 +143,36 @@ const shop = {
                 this.classList.add('active');
             });
         });
+
+        // Wishlist button functionality
+        document.querySelectorAll('.wishlist-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                const productCard = this.closest('.product-card');
+                if (!productCard || typeof wishlist === 'undefined') return;
+                
+                const product = {
+                    id: productCard.dataset.productId,
+                    title: productCard.querySelector('.product-title')?.textContent,
+                    price: productCard.querySelector('.product-price')?.textContent,
+                    image: productCard.querySelector('.product-image img')?.src
+                };
+                
+                if (product.id && product.title && product.price && product.image) {
+                    wishlist.toggleItem(product);
+                    
+                    // Toggle heart icon
+                    const icon = this.querySelector('i');
+                    if (icon) {
+                        icon.classList.toggle('far');
+                        icon.classList.toggle('fas');
+                        icon.classList.toggle('text-danger');
+                    }
+                }
+            });
+        });
     },
 
     filterByCategory(category) {
@@ -218,6 +253,59 @@ const shop = {
         if (category) {
             this.filterByCategory(category);
         }
+    },
+
+    resetFilters() {
+        // Reset category filters
+        this.filterByCategory('all');
+        
+        // Reset brand checkboxes
+        document.querySelectorAll('.brand-filter input').forEach(checkbox => {
+            checkbox.checked = false;
+        });
+        
+        // Reset color checkboxes
+        document.querySelectorAll('.color-filter input').forEach(checkbox => {
+            checkbox.checked = false;
+        });
+        
+        // Reset price range if it exists
+        const priceRange = document.getElementById('priceRange');
+        if (priceRange) {
+            priceRange.value = priceRange.max;
+            const priceOutput = document.getElementById('priceOutput');
+            if (priceOutput) {
+                priceOutput.textContent = priceRange.value;
+            }
+        }
+        
+        // Reset sort select to default
+        const sortSelect = document.getElementById('sortSelect');
+        if (sortSelect) {
+            sortSelect.value = 'default';
+            this.sortProducts('default');
+        }
+        
+        // Update the URL to remove category parameter
+        this.updateUrl('category', null);
+        
+        // Re-apply filters (which now should show all products)
+        this.applyFilters();
+    },
+
+    updateUrl(param, value) {
+        // Get current URL parameters
+        const url = new URL(window.location);
+        
+        // Update, add or remove the parameter
+        if (value === null) {
+            url.searchParams.delete(param);
+        } else {
+            url.searchParams.set(param, value);
+        }
+        
+        // Update the URL without reloading the page
+        window.history.pushState({}, '', url);
     }
 };
 
