@@ -11,103 +11,12 @@ document.addEventListener('DOMContentLoaded', function() {
     // Function to load product details
     async function loadProductDetails() {
         try {
-            // In a real app, you would fetch this from an API
-            // For demo, we'll use mock data with more complete information
-            const product = {
-                id: productId,
-                title: 'Premium Comfort Running Shoes',
-                price: 149.99,
-                originalPrice: 199.99,
-                discount: 25,
-                rating: 4.5,
-                reviewCount: 128,
-                brand: 'ShoePalace',
-                sku: 'SP-' + productId,
-                category: productId.split('-')[0] || 'men',
-                description: 'Experience ultimate comfort with our premium running shoes. Designed with cutting-edge technology to provide maximum support and cushioning for every stride. The breathable mesh upper ensures your feet stay cool, while the responsive midsole returns energy to keep you moving forward.',
-                longDescription: `
-                    <p>These premium running shoes represent the pinnacle of athletic footwear technology. Designed with performance and comfort as the highest priorities, they feature:</p>
-                    <ul>
-                        <li>Lightweight, breathable mesh upper that adapts to your foot</li>
-                        <li>Responsive cushioning that returns energy with each step</li>
-                        <li>Reinforced heel counter for added stability</li>
-                        <li>Durable rubber outsole with enhanced traction pattern</li>
-                        <li>Removable foam insole for customized comfort</li>
-                    </ul>
-                    <p>Whether you're training for a marathon or enjoying casual runs, these shoes provide the perfect balance of support, durability, and style.</p>
-                `,
-                images: [
-                    'assets/images/products/product-1.jpg',
-                    'assets/images/products/product-2.jpg',
-                    'assets/images/products/product-3.jpg',
-                    'assets/images/products/product-4.jpg'
-                ],
-                sizes: ['6', '7', '8', '9', '10', '11', '12'],
-                colors: [
-                    { name: 'Black', code: '#000000' },
-                    { name: 'White', code: '#FFFFFF' },
-                    { name: 'Red', code: '#FF0000' },
-                    { name: 'Blue', code: '#0000FF' }
-                ],
-                specifications: {
-                    material: 'Synthetic Mesh',
-                    sole: 'Rubber',
-                    closure: 'Lace-up',
-                    weight: '280g (Size 9)',
-                    cushioning: 'Responsive EVA',
-                    arch: 'Neutral',
-                    terrain: 'Road',
-                    warranty: '1 Year'
-                },
-                featured: true,
-                inStock: true,
-                reviews: [
-                    { 
-                        name: 'John D.', 
-                        rating: 5, 
-                        date: '2024-01-10', 
-                        title: 'Best running shoes I\'ve owned',
-                        comment: 'These shoes are incredibly comfortable right out of the box. No break-in period needed!' 
-                    },
-                    { 
-                        name: 'Sarah M.', 
-                        rating: 4, 
-                        date: '2024-02-15', 
-                        title: 'Great for long distances',
-                        comment: 'I\'ve run two marathons in these and they\'ve held up great. Could use a bit more arch support though.' 
-                    },
-                    { 
-                        name: 'Michael P.', 
-                        rating: 5, 
-                        date: '2024-03-05', 
-                        title: 'Worth every penny',
-                        comment: 'The cushioning is amazing and they look stylish too. Will definitely buy again.' 
-                    }
-                ],
-                relatedProducts: [
-                    {
-                        id: 'men-training-shoes',
-                        title: 'Elite Training Shoes',
-                        price: 129.99,
-                        image: 'assets/images/products/product-2.jpg',
-                        brand: 'ShoePalace'
-                    },
-                    {
-                        id: 'women-running-shoes',
-                        title: 'Women\'s Performance Runner',
-                        price: 139.99,
-                        image: 'assets/images/products/product-3.jpg',
-                        brand: 'ShoePalace'
-                    },
-                    {
-                        id: 'casual-sneakers',
-                        title: 'Everyday Comfort Sneakers',
-                        price: 89.99,
-                        image: 'assets/images/products/product-4.jpg',
-                        brand: 'ShoePalace'
-                    }
-                ]
-            };
+            // Get product from our products data
+            const product = products[productId];
+            
+            if (!product) {
+                throw new Error('Product not found');
+            }
 
             // Update the UI with product details
             updateProductUI(product);
@@ -131,7 +40,7 @@ document.addEventListener('DOMContentLoaded', function() {
         document.title = `${product.title} - ShoePalace`;
         document.querySelector('.product-title').textContent = product.title;
         document.querySelector('.product-brand span').textContent = product.brand;
-        document.querySelector('.product-sku span').textContent = product.sku;
+        document.querySelector('.product-sku span').textContent = product.id;
         
         // Update breadcrumb
         const categoryLink = document.querySelector('.product-category');
@@ -146,25 +55,25 @@ document.addEventListener('DOMContentLoaded', function() {
         
         if (mainImage && thumbnailTrack) {
             thumbnailTrack.innerHTML = ''; // Clear existing thumbnails
-            
-            mainImage.src = product.images[0];
-            mainImage.alt = product.title;
+        
+        mainImage.src = product.images[0];
+        mainImage.alt = product.title;
             
             // Setup image zoom effect
             setupImageZoom(mainImage);
 
-            product.images.forEach((image, index) => {
-                const thumbnail = document.createElement('img');
-                thumbnail.src = image;
-                thumbnail.alt = `${product.title} - Image ${index + 1}`;
-                thumbnail.className = `thumbnail ${index === 0 ? 'active' : ''}`;
-                thumbnail.addEventListener('click', () => {
-                    mainImage.src = image;
-                    document.querySelectorAll('.thumbnail').forEach(thumb => thumb.classList.remove('active'));
-                    thumbnail.classList.add('active');
-                });
-                thumbnailTrack.appendChild(thumbnail);
+        product.images.forEach((image, index) => {
+            const thumbnail = document.createElement('img');
+            thumbnail.src = image;
+            thumbnail.alt = `${product.title} - Image ${index + 1}`;
+            thumbnail.className = `thumbnail ${index === 0 ? 'active' : ''}`;
+            thumbnail.addEventListener('click', () => {
+                mainImage.src = image;
+                document.querySelectorAll('.thumbnail').forEach(thumb => thumb.classList.remove('active'));
+                thumbnail.classList.add('active');
             });
+            thumbnailTrack.appendChild(thumbnail);
+        });
         }
 
         // Update price
@@ -350,16 +259,16 @@ document.addEventListener('DOMContentLoaded', function() {
         if (sizeOptions && product.sizes) {
             sizeOptions.innerHTML = ''; // Clear existing sizes
             
-            product.sizes.forEach(size => {
-                const sizeBtn = document.createElement('button');
-                sizeBtn.className = 'size-option';
-                sizeBtn.textContent = size;
-                sizeBtn.addEventListener('click', () => {
-                    document.querySelectorAll('.size-option').forEach(btn => btn.classList.remove('active'));
-                    sizeBtn.classList.add('active');
-                });
-                sizeOptions.appendChild(sizeBtn);
+        product.sizes.forEach(size => {
+            const sizeBtn = document.createElement('button');
+            sizeBtn.className = 'size-option';
+            sizeBtn.textContent = size;
+            sizeBtn.addEventListener('click', () => {
+                document.querySelectorAll('.size-option').forEach(btn => btn.classList.remove('active'));
+                sizeBtn.classList.add('active');
             });
+            sizeOptions.appendChild(sizeBtn);
+        });
         }
 
         // Add color options
@@ -367,9 +276,9 @@ document.addEventListener('DOMContentLoaded', function() {
         if (colorOptions && product.colors) {
             colorOptions.innerHTML = ''; // Clear existing colors
             
-            product.colors.forEach(color => {
-                const colorBtn = document.createElement('button');
-                colorBtn.className = 'color-option';
+        product.colors.forEach(color => {
+            const colorBtn = document.createElement('button');
+            colorBtn.className = 'color-option';
                 colorBtn.style.backgroundColor = color.code;
                 colorBtn.setAttribute('title', color.name);
                 colorBtn.setAttribute('data-color', color.name);
@@ -379,12 +288,12 @@ document.addEventListener('DOMContentLoaded', function() {
                     new bootstrap.Tooltip(colorBtn);
                 }
                 
-                colorBtn.addEventListener('click', () => {
-                    document.querySelectorAll('.color-option').forEach(btn => btn.classList.remove('active'));
-                    colorBtn.classList.add('active');
-                });
-                colorOptions.appendChild(colorBtn);
+            colorBtn.addEventListener('click', () => {
+                document.querySelectorAll('.color-option').forEach(btn => btn.classList.remove('active'));
+                colorBtn.classList.add('active');
             });
+            colorOptions.appendChild(colorBtn);
+        });
         }
 
         // Update product rating stars
@@ -493,9 +402,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Setup quantity buttons
         initQuantityButtons();
-
-        // Load related products
-        loadRelatedProducts(product.relatedProducts);
     }
 
     function setupImageZoom(image) {
@@ -649,101 +555,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    function loadRelatedProducts(products) {
-        const relatedProductsContainer = document.getElementById('relatedProducts');
-        if (!relatedProductsContainer || !products || !products.length) return;
-        
-        relatedProductsContainer.innerHTML = '';
-        
-        products.forEach(product => {
-            const productCard = document.createElement('div');
-            productCard.className = 'col-md-4';
-            productCard.innerHTML = `
-                <div class="product-card" data-product-id="${product.id}">
-                    <a href="product.html?id=${product.id}" class="product-link">
-                        <div class="product-image">
-                            <img src="${product.image}" alt="${product.title}" class="img-fluid">
-                            <div class="product-actions">
-                                <button class="wishlist-btn related-wishlist-btn" data-product-id="${product.id}" style="--i:0">
-                                    <i class="far fa-heart"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </a>
-                    <div class="product-details">
-                        <a href="product.html?id=${product.id}" class="product-title">
-                            <span class="product-brand">${product.brand}</span>
-                            <h5 class="product-title">${product.title}</h5>
-                        </a>
-                        <div class="product-price">₦${product.price.toLocaleString()}</div>
-                        <button class="btn btn-primary related-add-to-cart-btn" data-product-id="${product.id}">
-                            <i class="fas fa-shopping-cart"></i> Add to Cart
-                        </button>
-                    </div>
-                </div>
-            `;
-            
-            relatedProductsContainer.appendChild(productCard);
-        });
-        
-        // Set up related products' add to cart buttons
-        document.querySelectorAll('.related-add-to-cart-btn').forEach(button => {
-            button.addEventListener('click', function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-                
-                const productId = this.getAttribute('data-product-id');
-                const productCard = this.closest('.product-card');
-                
-                if (!productCard) return;
-                
-                const productData = {
-                    id: productId,
-                    title: productCard.querySelector('.product-title').textContent,
-                    price: productCard.querySelector('.product-price').textContent,
-                    image: productCard.querySelector('.product-image img').src,
-                    brand: productCard.querySelector('.product-brand').textContent,
-                    quantity: 1
-                };
-                
-                if (typeof cart !== 'undefined') {
-                    cart.addItem(productData);
-                }
-            });
-        });
-        
-        // Set up related products' wishlist buttons
-        document.querySelectorAll('.related-wishlist-btn').forEach(button => {
-            button.addEventListener('click', function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-                
-                const productId = this.getAttribute('data-product-id');
-                const productCard = this.closest('.product-card');
-                
-                if (!productCard || typeof wishlist === 'undefined') return;
-                
-                const productData = {
-                    id: productId,
-                    title: productCard.querySelector('.product-title').textContent,
-                    price: productCard.querySelector('.product-price').textContent,
-                    image: productCard.querySelector('.product-image img').src,
-                    brand: productCard.querySelector('.product-brand').textContent
-                };
-                
-                wishlist.toggleItem(productData);
-                
-                // Toggle heart icon
-                const icon = this.querySelector('i');
-                if (icon) {
-                    icon.classList.toggle('far');
-                    icon.classList.toggle('fas');
-                    icon.classList.toggle('text-danger');
-                }
-            });
-        });
-    }
-
     function showNotification(message, type = 'success') {
         const notification = document.createElement('div');
         notification.className = `product-notification ${type}`;
@@ -754,44 +565,14 @@ document.addEventListener('DOMContentLoaded', function() {
         
         document.body.appendChild(notification);
         
-        // Style the notification directly via JS to ensure consistency
-        notification.style.position = 'fixed';
-        notification.style.bottom = '30px';
-        notification.style.right = '20px';
-        notification.style.padding = '1rem 1.5rem';
-        notification.style.borderRadius = '8px';
-        notification.style.background = '#fff';
-        notification.style.boxShadow = '0 5px 15px rgba(0,0,0,0.1)';
-        notification.style.zIndex = '1060';
-        notification.style.maxWidth = '350px';
-        notification.style.transform = 'translateX(110%)';
-        notification.style.transition = 'transform 0.3s ease-out';
-        
-        // Set border color based on notification type
-        if (type === 'success') {
-            notification.style.borderLeft = '4px solid #28a745';
-        } else if (type === 'warning') {
-            notification.style.borderLeft = '4px solid #ffc107';
-        } else if (type === 'error') {
-            notification.style.borderLeft = '4px solid #dc3545';
-        }
-        
-        // Handle mobile responsiveness
-        if (window.innerWidth <= 768) {
-            notification.style.left = '20px';
-            notification.style.right = '20px';
-            notification.style.bottom = '20px';
-            notification.style.maxWidth = 'none';
-        }
-        
         // Animate in
         setTimeout(() => {
-            notification.style.transform = 'translateX(0)';
+            notification.classList.add('show');
         }, 10);
         
         // Remove after 3 seconds
         setTimeout(() => {
-            notification.style.transform = 'translateX(110%)';
+            notification.classList.remove('show');
             setTimeout(() => notification.remove(), 300);
         }, 3000);
     }

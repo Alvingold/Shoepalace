@@ -233,14 +233,58 @@
     font-size: 1.1rem;
 }
 
+/* Cart open styling for body */
+body.cart-open {
+    overflow: hidden;
+}
+
+/* Improve styling specifically for the cart handle on mobile */
 @media (max-width: 767.98px) {
     .cart-sidebar {
         width: 100%;
         right: -100%;
+        max-height: 85vh; /* Prevent it from covering entire screen */
+        top: auto;
+        bottom: 0;
+        border-radius: 15px 15px 0 0;
+        box-shadow: 0 -5px 20px rgba(0,0,0,0.15);
+    }
+    
+    .cart-header {
+        padding: 1rem;
+        position: relative;
+    }
+    
+    /* Add a visual handle for the cart drawer */
+    .cart-header::before {
+        content: '';
+        display: block;
+        width: 40px;
+        height: 4px;
+        background-color: #e0e0e0;
+        border-radius: 2px;
+        position: absolute;
+        top: 8px;
+        left: 50%;
+        transform: translateX(-50%);
     }
     
     .cart-header h5 {
         font-size: 1.1rem;
+        margin-top: 10px;
+    }
+    
+    .close-cart {
+        width: 36px;
+        height: 36px;
+        font-size: 1.2rem;
+        background-color: #f5f5f5;
+    }
+    
+    .cart-items {
+        padding: 1rem;
+        max-height: calc(85vh - 140px); /* Account for header and footer */
+        -webkit-overflow-scrolling: touch; /* Smooth scrolling for iOS */
     }
     
     .cart-item {
@@ -270,9 +314,22 @@
         height: 24px;
     }
     
+    .cart-footer {
+        padding: 1rem;
+    }
+    
     .checkout-btn {
         font-size: 0.9rem;
         padding: 0.7rem;
+    }
+    
+    /* Cart notification for mobile */
+    .cart-notification {
+        bottom: 15px !important;
+        left: 15px !important;
+        right: 15px !important;
+        max-width: none !important;
+        z-index: 1099 !important;
     }
 }
 
@@ -301,4 +358,6 @@
     font-weight: 600;
     border: 2px solid var(--white);
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-} 
+}
+
+/* Cart Notification styles removed to use the ones in base.css */ 

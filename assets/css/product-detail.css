@@ -159,6 +159,11 @@
     margin-bottom: 1.5rem;
 }
 
+/* Last option group should have slightly more margin for separation from actions */
+.color-selector {
+    margin-bottom: 1rem;
+}
+
 .size-option {
     min-width: 45px;
     height: 45px;
@@ -171,6 +176,8 @@
     font-weight: 500;
     transition: all 0.3s ease;
     background: #fff;
+    padding: 0 10px;
+    position: relative;
 }
 
 .size-option:hover {
@@ -195,6 +202,7 @@
     position: relative;
     transition: all 0.3s ease;
     border: 1px solid rgba(0,0,0,0.1);
+    flex-shrink: 0;
 }
 
 .color-option:hover {
@@ -210,8 +218,12 @@
     border-radius: 50%;
 }
 
-.product-actions {
+.product-info .product-actions {
+    margin-top: 1.5rem;
     margin-bottom: 2rem;
+    border-top: 1px solid #f0f0f0;
+    padding-top: 1.5rem;
+    clear: both;
 }
 
 .quantity-selector {
@@ -556,12 +568,40 @@
         font-size: 0.9rem;
     }
     
+    /* Improve mobile product variants and actions spacing */
+    .product-info .product-variants {
+        margin-bottom: 1.5rem;
+    }
+    
+    .size-options, .color-options {
+        gap: 0.5rem;
+        margin-bottom: 1.2rem;
+    }
+    
+    .color-selector {
+        margin-bottom: 0.5rem;
+    }
+    
+    .product-info .product-actions {
+        margin-top: 1rem;
+        padding-top: 1.2rem;
+    }
+    
+    .quantity-selector {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 1rem;
+        justify-content: space-between;
+    }
+    
     .action-buttons {
         flex-direction: column;
+        margin-top: 0.5rem;
     }
     
     .wishlist-btn {
         width: 100%;
+        margin-top: 0.5rem;
     }
     
     .product-notification {
@@ -569,6 +609,17 @@
         left: 20px;
         right: 20px;
         max-width: none;
+    }
+    
+    .size-option {
+        min-width: 40px;
+        height: 40px;
+        font-size: 0.9rem;
+    }
+    
+    .color-option {
+        width: 30px;
+        height: 30px;
     }
 }
 

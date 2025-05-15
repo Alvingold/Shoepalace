@@ -91,16 +91,85 @@ const cart = {
             closeCart.addEventListener('click', () => this.closeCartSidebar());
             cartOverlay.addEventListener('click', () => this.closeCartSidebar());
             checkoutBtn.addEventListener('click', () => this.checkoutCart());
+            
+            // Add mobile swipe down to close functionality
+            this.setupSwipeGesture(cartSidebar);
         }
+    },
+
+    setupSwipeGesture(element) {
+        let touchStartY = 0;
+        let touchEndY = 0;
+        const minSwipeDistance = 80; // Minimum distance to consider as swipe
+        
+        const cartHeader = document.querySelector('.cart-header');
+        if (!cartHeader) return;
+        
+        // Add touch events to the cart header for swipe-to-close functionality
+        cartHeader.addEventListener('touchstart', (e) => {
+            touchStartY = e.touches[0].clientY;
+        }, false);
+        
+        cartHeader.addEventListener('touchmove', (e) => {
+            touchEndY = e.touches[0].clientY;
+            
+            // Calculate distance moved
+            const distY = touchEndY - touchStartY;
+            
+            // If swipe down, allow dragging the cart
+            if (distY > 0) {
+                // Prevent default scrolling when swiping on the header
+                e.preventDefault();
+                
+                // Transform the cart using the swipe distance with a resistance factor
+                const moveY = Math.min(distY * 0.4, 150);
+                element.style.transform = `translateY(${moveY}px)`;
+            }
+        }, { passive: false });
+        
+        cartHeader.addEventListener('touchend', (e) => {
+            const distY = touchEndY - touchStartY;
+            
+            // Reset transform
+            element.style.transition = 'transform 0.3s ease';
+            
+            // If swipe down distance is large enough, close cart
+            if (distY > minSwipeDistance) {
+                this.closeCartSidebar();
+            } else {
+                // Otherwise snap back
+                element.style.transform = 'translateY(0)';
+            }
+            
+            // Remove transition after animation completes
+            setTimeout(() => {
+                element.style.transition = '';
+            }, 300);
+        }, false);
     },
 
     openCartSidebar() {
         const cartSidebar = document.querySelector('.cart-sidebar');
         const cartOverlay = document.querySelector('.cart-overlay');
         if (cartSidebar && cartOverlay) {
-            cartSidebar.classList.add('active');
-            cartOverlay.classList.add('active');
-            document.body.style.overflow = 'hidden';
+                cartSidebar.classList.add('active');
+                cartOverlay.classList.add('active');
+            
+            // Save current scroll position
+            this.scrollPosition = window.pageYOffset;
+            
+            // Add a class to body instead of changing overflow directly
+            document.body.classList.add('cart-open');
+            
+            // For mobile devices, enable touch scrolling inside cart but prevent body scroll
+            if (window.innerWidth <= 767) {
+                document.body.style.position = 'fixed';
+                document.body.style.top = `-${this.scrollPosition}px`;
+                document.body.style.width = '100%';
+            } else {
+                // For desktop just prevent scroll
+                document.body.style.overflow = 'hidden';
+            }
         }
     },
 
@@ -108,9 +177,21 @@ const cart = {
         const cartSidebar = document.querySelector('.cart-sidebar');
         const cartOverlay = document.querySelector('.cart-overlay');
         if (cartSidebar && cartOverlay) {
-            cartSidebar.classList.remove('active');
-            cartOverlay.classList.remove('active');
-            document.body.style.overflow = '';
+                cartSidebar.classList.remove('active');
+                cartOverlay.classList.remove('active');
+            
+            // Remove class from body
+            document.body.classList.remove('cart-open');
+            
+            // Restore scroll position on mobile
+            if (window.innerWidth <= 767) {
+                document.body.style.position = '';
+                document.body.style.top = '';
+                document.body.style.width = '';
+                window.scrollTo(0, this.scrollPosition);
+            } else {
+                document.body.style.overflow = '';
+            }
         }
     },
 
@@ -316,36 +397,14 @@ const cart = {
         
         document.body.appendChild(notification);
         
-        // Style the notification to match product-notification
-        notification.style.position = 'fixed';
-        notification.style.bottom = '30px';
-        notification.style.right = '20px';
-        notification.style.padding = '1rem 1.5rem';
-        notification.style.borderRadius = '8px';
-        notification.style.background = '#fff';
-        notification.style.boxShadow = '0 5px 15px rgba(0,0,0,0.1)';
-        notification.style.zIndex = '1060';
-        notification.style.maxWidth = '350px';
-        notification.style.transform = 'translateX(110%)';
-        notification.style.transition = 'transform 0.3s ease-out';
-        notification.style.borderLeft = '4px solid #28a745';
-        
-        // Handle mobile responsiveness
-        if (window.innerWidth <= 768) {
-            notification.style.left = '20px';
-            notification.style.right = '20px';
-            notification.style.bottom = '20px';
-            notification.style.maxWidth = 'none';
-        }
-        
         // Animate in
         setTimeout(() => {
-            notification.style.transform = 'translateX(0)';
+            notification.classList.add('show');
         }, 10);
         
         // Remove after 3 seconds
         setTimeout(() => {
-            notification.style.transform = 'translateX(110%)';
+            notification.classList.remove('show');
             setTimeout(() => notification.remove(), 300);
         }, 3000);
     },

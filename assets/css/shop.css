@@ -356,7 +356,7 @@
     transform: scale(1.07);
 }
 
-.product-actions {
+.product-card-actions {
     position: absolute;
     top: 0;
     left: 0;
@@ -371,7 +371,7 @@
     background: transparent;
 }
 
-.product-card:hover .product-actions {
+.product-card:hover .product-card-actions {
     opacity: 1;
 }
 
@@ -774,4 +774,60 @@
     pointer-events: none;
     background-color: #f9f9f9;
     border-color: #eee;
+}
+
+/* Shop Notification */
+.shop-notification {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    z-index: 1000;
+    transform: translateY(100px);
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.shop-notification.show {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.shop-notification .notification-content {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.shop-notification .notification-content i {
+    color: #e74c3c;
+    font-size: 1.2rem;
+}
+
+.shop-notification .notification-content span {
+    color: #333;
+    font-size: 0.9rem;
+}
+
+.shop-notification .notification-close {
+    background: none;
+    border: none;
+    color: #999;
+    cursor: pointer;
+    padding: 4px;
+    transition: color 0.3s ease;
+}
+
+.shop-notification .notification-close:hover {
+    color: #333;
+}
+
+.shop-notification.info {
+    border-left: 4px solid #e74c3c;
 } 

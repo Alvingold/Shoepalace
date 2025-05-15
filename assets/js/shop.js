@@ -4,6 +4,7 @@ const shop = {
     currentFilter: 'all',
     initialized: false,
     productGrid: null,
+    notificationInterval: null,
 
     init() {
         if (this.initialized) return;
@@ -15,24 +16,99 @@ const shop = {
         this.loadFromUrl();
         this.setupEventListeners();
         this.updateProductCount();
+        this.startProductNotification();
+    },
+
+    startProductNotification() {
+        // Show notification every 30 seconds
+        this.notificationInterval = setInterval(() => {
+            this.showNotification('Tap on the product for more information', 'info');
+        }, 30000); // 30 seconds
+
+        // Show first notification after 5 seconds
+        setTimeout(() => {
+            this.showNotification('Tap on the product for more information', 'info');
+        }, 5000);
+    },
+
+    showNotification(message, type = 'info') {
+        // Remove any existing notifications
+        const existingNotification = document.querySelector('.shop-notification');
+        if (existingNotification) {
+            existingNotification.remove();
+        }
+
+        // Create notification element
+        const notification = document.createElement('div');
+        notification.className = `shop-notification ${type}`;
+        notification.innerHTML = `
+            <div class="notification-content">
+                <i class="fas fa-info-circle"></i>
+                <span>${message}</span>
+            </div>
+            <button class="notification-close">
+                <i class="fas fa-times"></i>
+            </button>
+        `;
+
+        // Add to page
+        document.body.appendChild(notification);
+
+        // Add show class after a small delay for animation
+        setTimeout(() => {
+            notification.classList.add('show');
+        }, 10);
+
+        // Add click handler to close button
+        const closeBtn = notification.querySelector('.notification-close');
+        if (closeBtn) {
+            closeBtn.addEventListener('click', () => {
+                // Clear the interval if it exists
+                if (this.notificationInterval) {
+                    clearInterval(this.notificationInterval);
+                }
+                notification.classList.remove('show');
+                setTimeout(() => notification.remove(), 300);
+            });
+        }
+
+        // Auto remove after 5 seconds
+        setTimeout(() => {
+            if (notification.parentElement) {
+                notification.classList.remove('show');
+                setTimeout(() => notification.remove(), 300);
+            }
+        }, 5000);
     },
 
     setupEventListeners() {
         // Category buttons
         document.querySelectorAll('[data-category]').forEach(btn => {
             btn.addEventListener('click', (e) => {
-                // Only handle clicks on category buttons, not product cards
-                if (!e.target.closest('.product-card')) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                // Remove active class from all category buttons
+                document.querySelectorAll('[data-category]').forEach(b => {
+                    b.classList.remove('active');
+                });
+                
+                // Add active class to clicked button
+                btn.classList.add('active');
+                
                     const category = btn.dataset.category;
                     this.filterByCategory(category);
                     this.updateUrl('category', category);
-                }
             });
         });
 
         // Reset filter buttons
         document.querySelectorAll('.reset-filter-btn').forEach(btn => {
-            btn.addEventListener('click', () => this.resetFilters());
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                this.resetFilters();
+            });
         });
 
         // Product click handling
@@ -43,7 +119,7 @@ const shop = {
             });
         });
 
-        // Add to cart button handlers specifically for shop page
+        // Add to cart button handlers
         document.querySelectorAll('.add-to-cart-btn').forEach(button => {
             button.addEventListener('click', function(e) {
                 e.preventDefault();
@@ -187,11 +263,6 @@ const shop = {
             if (shouldShow) visibleCount++;
         });
 
-        // Update active states on category buttons
-        document.querySelectorAll('[data-category]').forEach(btn => {
-            btn.classList.toggle('active', btn.dataset.category === category);
-        });
-
         this.updateProductCount(visibleCount);
         this.updateShopTitle(category);
     },
@@ -250,14 +321,30 @@ const shop = {
     loadFromUrl() {
         const params = new URLSearchParams(window.location.search);
         const category = params.get('category');
+        
         if (category) {
+            // Update active state on category links
+            document.querySelectorAll('.category-buttons a').forEach(link => {
+                if (link.getAttribute('href').includes(`category=${category}`)) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+            
+            // Filter products
             this.filterByCategory(category);
+            
+            // Update shop title
+            this.updateShopTitle(category);
         }
     },
 
     resetFilters() {
         // Reset category filters
-        this.filterByCategory('all');
+        document.querySelectorAll('[data-category]').forEach(btn => {
+            btn.classList.remove('active');
+        });
         
         // Reset brand checkboxes
         document.querySelectorAll('.brand-filter input').forEach(checkbox => {
@@ -282,15 +369,34 @@ const shop = {
         // Reset sort select to default
         const sortSelect = document.getElementById('sortSelect');
         if (sortSelect) {
-            sortSelect.value = 'default';
-            this.sortProducts('default');
+            sortSelect.value = 'popularity';
+            this.sortProducts('popularity');
         }
         
-        // Update the URL to remove category parameter
-        this.updateUrl('category', null);
+        // Show all products
+        if (this.productGrid) {
+            Array.from(this.productGrid.children).forEach(product => {
+                product.style.display = '';
+            });
+        }
         
-        // Re-apply filters (which now should show all products)
-        this.applyFilters();
+        // Update the URL to remove all parameters
+        window.history.replaceState({}, '', window.location.pathname);
+        
+        // Update product count
+        this.updateProductCount();
+        
+        // Update shop title
+        this.updateShopTitle('all');
+        
+        // Close mobile offcanvas if open
+        const offcanvas = document.getElementById('filterOffcanvas');
+        if (offcanvas) {
+            const bsOffcanvas = bootstrap.Offcanvas.getInstance(offcanvas);
+            if (bsOffcanvas) {
+                bsOffcanvas.hide();
+            }
+        }
     },
 
     updateUrl(param, value) {
@@ -306,6 +412,32 @@ const shop = {
         
         // Update the URL without reloading the page
         window.history.pushState({}, '', url);
+    },
+
+    sortProducts(sortBy) {
+        if (!this.productGrid) return;
+
+        const products = Array.from(this.productGrid.children);
+        products.sort((a, b) => {
+            switch (sortBy) {
+                case 'price-low':
+                    return parseInt(a.getAttribute('data-price')) - parseInt(b.getAttribute('data-price'));
+                case 'price-high':
+                    return parseInt(b.getAttribute('data-price')) - parseInt(a.getAttribute('data-price'));
+                case 'newest':
+                    return parseInt(b.getAttribute('data-date')) - parseInt(a.getAttribute('data-date'));
+                case 'rating':
+                    return parseFloat(b.getAttribute('data-rating')) - parseFloat(a.getAttribute('data-rating'));
+                default: // popularity
+                    return parseInt(b.getAttribute('data-reviews')) - parseInt(a.getAttribute('data-reviews'));
+            }
+        });
+
+        // Clear and reappend sorted products
+        this.productGrid.innerHTML = '';
+        products.forEach(product => this.productGrid.appendChild(product));
+
+        this.updateProductCount(products.length);
     }
 };
 
